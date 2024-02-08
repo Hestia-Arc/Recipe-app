@@ -1,31 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recipe app</title>
     <link rel="stylesheet" href="./src/css/output.css" />
-  </head>
-  <body>
-    <div>
-      <nav class="h-20 flex justify-between items-center bg-gray-200 px-10 ">
-        <div class="h-full bg-gray-600">Food & Recipe</div>
+</head>
 
-        <ul class="flex justify-between w-1/3 capitalize border-solid border-2 border-indigo-600">
-          <li class="underline">menu</li>
-          <li>about</li>
-          <li>groceries</li>
+<body>
+    <div>
+        <nav class="h-20 flex justify-between items-center bg-gray-200 px-10 ">
+            <div class="h-full bg-gray-600">Recipes & Food</div>
+
+            <ul class="flex justify-between w-1/3 capitalize >
+          <li class="">Basics</li>
+          <li class="">Ingredients</li>
+          <li>Nutrition</li>
         </ul>
       </nav>
-      <section class="h-96 mt-8 border-solid border-orange-400 border-2">welcome to the Recipe app</section>
-    
-      <section class="h-96 mt-8 border-solid border-orange-400 border-2">welcome to the Recipe app</section>
-      <section class="h-96 mt-8 border-solid border-orange-400 border-2">welcome to the Recipe app</section>
-      <section class="h-96 mt-8 border-solid border-orange-400 border-2">welcome to the Recipe app</section>
 
-    
+      <!-- hero image -->
+      <section class=" h-[500px] bg-bottom bg-no-repeat bg-cover hover:bg-center " style=" background-image:
+                url('./src/images/img-2.jpg');">
+                </section>
+
+                <!-- sections -->
+                <!-- <section class="flex justify-between items-center px-10 h-96 mt-8 border-solid border-blue-400 border-2"> -->
+                <section class="flex justify-between items-center px-10 mt-24 mb-24 ">
+                    <div class="h-80 w-80 border-solid border-black border-1 bg-center bg-no-repeat bg-cover relative"
+                        style="background-image: url('./src/images/img-2.jpg');">
+                        <div class="absolute bottom-[2rem] right-[20%]  w-[200px] p-4 bg-slate-500 text-center">Breakfast</div>
+                    </div>
+
+                    <div class="h-80 w-80 border-solid border-black border-1 bg-center bg-no-repeat bg-cover relative"
+                        style="background-image: url('./src/images/img-2.jpg');">
+                        <div class="absolute bottom-[2rem] right-[20%]  w-[200px] p-4 bg-slate-500 text-center">Lunch</div>
+
+                    </div>
+
+                    <div class="h-80 w-80 border-solid border-black border-1 bg-center bg-no-repeat bg-cover relative"
+                        style="background-image: url('./src/images/img-2.jpg');">
+                        <div class="absolute bottom-[2rem] right-[20%]  w-[200px] p-4 bg-slate-500 text-center">Dinner</div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- <section class="h-96 mt-8 border-solid border-orange-400 border-2">welcome to the Recipe app</section> -->
+                <section class=" mt-8 mb-4 text-center">
+                    <p class="p-2">Built by Hestia 2024</p>
+                </section>
+
+
     </div>
 
     <script src="./src/ts/app.js"></script>
-  </body>
+</body>
+
 </html>

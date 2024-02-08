@@ -544,8 +544,88 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.top-2 {
+  top: 0.5rem;
+}
+
+.top-\[5rem\] {
+  top: 5rem;
+}
+
+.bottom-\[2rem\] {
+  bottom: 2rem;
+}
+
+.right-5 {
+  right: 1.25rem;
+}
+
+.right-3 {
+  right: 0.75rem;
+}
+
+.right-\[3rem\] {
+  right: 3rem;
+}
+
+.right-\[2rem\] {
+  right: 2rem;
+}
+
+.right-\[1rem\] {
+  right: 1rem;
+}
+
+.right-\[2\.5rem\] {
+  right: 2.5rem;
+}
+
+.right-\[2\.8rem\] {
+  right: 2.8rem;
+}
+
+.right-\[5\%\] {
+  right: 5%;
+}
+
+.right-\[10\%\] {
+  right: 10%;
+}
+
+.right-\[20\%\] {
+  right: 20%;
+}
+
 .mt-8 {
   margin-top: 2rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.mt-14 {
+  margin-top: 3.5rem;
+}
+
+.mt-24 {
+  margin-top: 6rem;
+}
+
+.mb-24 {
+  margin-bottom: 6rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
 }
 
 .flex {
@@ -564,8 +644,48 @@ video {
   height: 100%;
 }
 
+.h-80 {
+  height: 20rem;
+}
+
+.h-\[500px\] {
+  height: 500px;
+}
+
+.h-5 {
+  height: 1.25rem;
+}
+
+.h-\[100px\] {
+  height: 100px;
+}
+
+.h-\[60px\] {
+  height: 60px;
+}
+
+.h-2 {
+  height: 0.5rem;
+}
+
 .w-1\/3 {
   width: 33.333333%;
+}
+
+.w-40 {
+  width: 10rem;
+}
+
+.w-80 {
+  width: 20rem;
+}
+
+.w-5 {
+  width: 1.25rem;
+}
+
+.w-\[200px\] {
+  width: 200px;
 }
 
 .items-center {
@@ -594,6 +714,16 @@ video {
   border-color: rgb(251 146 60 / var(--tw-border-opacity));
 }
 
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+.border-blue-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(96 165 250 / var(--tw-border-opacity));
+}
+
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
@@ -604,9 +734,62 @@ video {
   background-color: rgb(75 85 99 / var(--tw-bg-opacity));
 }
 
+.bg-slate-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
+}
+
+.bg-\[url\(\'\.\/src\/images\/img-2\.jpg\'\)\] {
+  background-image: url('./src/images/img-2.jpg');
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-center {
+  background-position: center;
+}
+
+.bg-top {
+  background-position: top;
+}
+
+.bg-bottom {
+  background-position: bottom;
+}
+
+.bg-no-repeat {
+  background-repeat: no-repeat;
+}
+
+.p-5 {
+  padding: 1.25rem;
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-bold {
+  font-weight: 700;
 }
 
 .capitalize {
@@ -615,4 +798,12 @@ video {
 
 .underline {
   text-decoration-line: underline;
+}
+
+.hover\:bg-top:hover {
+  background-position: top;
+}
+
+.hover\:bg-center:hover {
+  background-position: center;
 }
