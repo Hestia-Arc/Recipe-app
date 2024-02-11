@@ -40,14 +40,14 @@ function getRecipes() {
         var response, data;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, fetch('https://www.themealdb.com/api/json/v2/', { method: "GET" })];
+                case 0: return [4 /*yield*/, fetch('https://www.themealdb.com/api/json/v1/1/categories.php', { method: "GET" })];
                 case 1:
                     response = _a.sent();
                     return [4 /*yield*/, response.json()];
                 case 2:
                     data = _a.sent();
                     console.log(data);
-                    return [2 /*return*/];
+                    return [2 /*return*/, data];
             }
         });
     });
