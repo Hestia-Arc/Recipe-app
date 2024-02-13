@@ -34,18 +34,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var recipe = 'soups';
+var box = document.querySelector(".box");
+var boxImg = document.querySelector(".img-box");
+var cateBox = document.querySelector('.category-box');
+// =======-----------------------------
+function displayRecipe(info) {
+    boxImg.setAttribute("src", info === null || info === void 0 ? void 0 : info.strMealThumb);
+    console.log(info === null || info === void 0 ? void 0 : info.strMealThumb);
+}
 function getRecipes() {
     return __awaiter(this, void 0, void 0, function () {
         var response, data;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, fetch('https://www.themealdb.com/api/json/v1/1/categories.php', { method: "GET" })];
+                case 0: return [4 /*yield*/, fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata", { method: "GET" })];
                 case 1:
                     response = _a.sent();
                     return [4 /*yield*/, response.json()];
                 case 2:
                     data = _a.sent();
+                    //   displayRecipe(data.meals[0]);
                     console.log(data);
                     return [2 /*return*/, data];
             }
@@ -53,3 +61,30 @@ function getRecipes() {
     });
 }
 getRecipes();
+function displayCategory(data) {
+    // boxImg.setAttribute("src", info?.strMealThumb);
+    console.log(data);
+    data === null || data === void 0 ? void 0 : data.categories.forEach(function (item) {
+        var html = "\n\n    <div class=\" h-72 w-[12rem] flex flex-col justify-end items-center pb-4 border-solid border-black border-1 rounded-md bg-center bg-no-repeat bg-cover \"\n        style=\"background-image: url('".concat(item.strCategoryThumb, "');\">\n        <div class=\"w-[100px] p-1 rounded-2xl bg-gray-200 text-center text-xs uppercase font-bold\">\n            ").concat(item.strCategory, "\n        </div>\n    </div>\n    \n    ");
+        // cateBox.innerHTML = html
+        cateBox.insertAdjacentHTML("afterbegin", html);
+    });
+}
+function getCategories() {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fetch("https://www.themealdb.com/api/json/v1/1/categories.php", { method: "GET" })];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    data = _a.sent();
+                    displayCategory(data);
+                    return [2 /*return*/, data];
+            }
+        });
+    });
+}
+getCategories();

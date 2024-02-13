@@ -3,6 +3,7 @@ import type { Config } from 'tailwindcss'
 export default {
   content: [
     './index.html',
+    './src/pages/RecipeInfo.html',
     './src/ts/app.ts'
   ],
   theme: {
