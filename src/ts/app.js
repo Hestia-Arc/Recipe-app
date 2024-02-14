@@ -36,11 +36,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var box = document.querySelector(".box");
 var boxImg = document.querySelector(".img-box");
-var cateBox = document.querySelector('.category-box');
+var mealImage = document.querySelector("#meal-img-box");
+var cateBox = document.querySelector(".category-box");
+var moreDisplay = document.querySelector(".recipe-display-box");
+var mealCategory = document.querySelector(".meal-category");
+var mealName = document.querySelector(".meal-name");
+var mealGuide = document.querySelector(".meal-guide");
+var mealBlogLink = document.querySelector(".meal-src");
 // =======-----------------------------
 function displayRecipe(info) {
-    boxImg.setAttribute("src", info === null || info === void 0 ? void 0 : info.strMealThumb);
-    console.log(info === null || info === void 0 ? void 0 : info.strMealThumb);
+    //   boxImg.setAttribute("src", info?.strMealThumb);
+    //   console.log(info?.strMealThumb);
+    var data = info.meals[0];
+    mealImage.style.backgroundImage = "url(".concat(data === null || data === void 0 ? void 0 : data.strMealThumb, ")");
+    mealCategory.textContent = data.strCategory;
+    mealName.textContent = data.strMeal;
+    mealGuide.textContent = "".concat(data.strInstructions.slice(0, 400), "...");
+    mealBlogLink.setAttribute('href', data.strSource);
 }
 function getRecipes() {
     return __awaiter(this, void 0, void 0, function () {
@@ -54,20 +66,29 @@ function getRecipes() {
                 case 2:
                     data = _a.sent();
                     //   displayRecipe(data.meals[0]);
-                    console.log(data);
+                    //   console.log(data);
                     return [2 /*return*/, data];
             }
         });
     });
 }
-getRecipes();
 function displayCategory(data) {
     // boxImg.setAttribute("src", info?.strMealThumb);
-    console.log(data);
-    data === null || data === void 0 ? void 0 : data.categories.forEach(function (item) {
-        var html = "\n\n    <div class=\" h-72 w-[12rem] flex flex-col justify-end items-center pb-4 border-solid border-black border-1 rounded-md bg-center bg-no-repeat bg-cover \"\n        style=\"background-image: url('".concat(item.strCategoryThumb, "');\">\n        <div class=\"w-[100px] p-1 rounded-2xl bg-gray-200 text-center text-xs uppercase font-bold\">\n            ").concat(item.strCategory, "\n        </div>\n    </div>\n    \n    ");
+    //   console.log(data);
+    var _a;
+    var dataSpliced = (_a = data.categories) === null || _a === void 0 ? void 0 : _a.splice(5, 8);
+    dataSpliced.forEach(function (item) {
+        // const html = `
+        // <div class=" h-64 w-[11rem] flex flex-col justify-end items-center pb-4  rounded-md bg-center bg-no-repeat bg-cover bg-slate-100 "
+        //     style="background-image: url('${item.strCategoryThumb}');">
+        //     <div class="w-[100px] p-1 rounded-2xl bg-gray-300 text-center text-xs uppercase font-bold">
+        //         ${item.strCategory}
+        //     </div>
+        // </div>
+        // `;
+        var categoryHtml = "\n    <div class=\"h-20 w-full bg-slate-100 rounded-full bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-2 \"\n        style=\"background-image: url('".concat(item.strCategoryThumb, "')\">\n\n            <div\n                class=\"w-[90px] p-1 rounded-2xl bg-slate-400 text-center text-xs uppercase font-bold text-slate-200 \">\n                ").concat(item.strCategory, "\n            </div>\n        </div>\n    \n    ");
         // cateBox.innerHTML = html
-        cateBox.insertAdjacentHTML("afterbegin", html);
+        cateBox.insertAdjacentHTML("afterbegin", categoryHtml);
     });
 }
 function getCategories() {
@@ -88,3 +109,53 @@ function getCategories() {
     });
 }
 getCategories();
+// =============================
+// GET MEAL BY NAME
+// ============================
+function getMeal() {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fetch("https://www.themealdb.com/api/json/v1/1/random.php", { method: "GET" })];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    data = _a.sent();
+                    displayRecipe(data);
+                    // console.log(data)
+                    return [2 /*return*/, data];
+            }
+        });
+    });
+}
+getMeal();
+// ==========================
+// =============================
+function getMealByCategory() {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, response2, data, data2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood", { method: "GET" })];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, fetch("https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772", { method: "GET" })];
+                case 2:
+                    response2 = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 3:
+                    data = _a.sent();
+                    return [4 /*yield*/, response2.json()];
+                case 4:
+                    data2 = _a.sent();
+                    // displayRecipe(data);
+                    // console.log(data)
+                    // console.log(data2)
+                    return [2 /*return*/, data];
+            }
+        });
+    });
+}
+//   getMealByCategory();
