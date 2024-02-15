@@ -7,9 +7,63 @@
     <link rel="stylesheet" href="../css/output.css">
 </head>
 <body>
-    <p class="underline box">recipe</p>
-    <img src="" alt="" class="img-box">
+    <div>
+        <nav class="h-20 flex justify-between items-center bg-gray-200 px-20 ">
+            <div class="h-full bg-gray-600 text-slate-100 text-1xs text-center p-3 leading-6">Food<br> Recipes</div>
 
+            <ul class="flex justify-between w-1/4 font-bold uppercase text-xs">
+                <li class="">Basics</li>
+                <li class="">Ingredients</li>
+                <li>Nutrition</li>
+            </ul>
+        </nav>
+
+        <div class=" mt-4 mx-20 py-2 flex border-solid border-b-2  border-slate-100">
+       <a href="../../index.html" class="hover:underline"><p class="text-slate-400 ">Home </p></a>
+       <p class="text-gray-700 font-semibold pl-1">/ Smoothie</p>
+        </div>
+
+
+        <!-- ======================= -->
+        <!-- GRID -->
+        <!-- ======================= -->
+        <div class="min-h-[500px] mt-6 mb-10 px-20 grid grid-cols-12 gap-10">
+
+            <div class=" h-full col-span-8 flex flex-col gap-3 ">
+                <h2 class="capitalize text-1xs text-slate-700 font-bold">green smoothie</h2>
+            
+                <div id='meal-img-box'
+                class=" h-96  rounded-md bg-gray-400 bg-center bg-no-repeat bg-cover"></div>
+            
+                <h3 class="text-[1.2rem] font-bold text-slate-700 pb-1 mt-2 border-solid border-b-[1px] border-gray-300">Method</h3>
+            </div>
+           
+           <!-- ======================= -->
+           <!-- SIDE -->
+           <!-- ======================= -->
+            <div class=" h-full col-span-4 ">
+               <!-- VIDEO -->
+                <div class="h-[200px] mt-12 rounded-sm border-solid border-2 border-slate-200"></div>
+
+
+                <!-- INGREDIENTS -->
+                <div class="h-[400px] mt-4 bg-gray-200">
+                    <h2 class="px-3 py-3 capitalize bg-gray-600 text-[1.2rem] text-slate-100 font-bold">Ingredients</h2>
+                </div>
+            </div>
+
+        </div>
+
+
+         <!-- ======================= -->
+        <!-- FOOTER -->
+        <!-- ======================== -->
+        <section class="h-[50px] mt-8 mb-4 px-20 ">
+            <p class="p-4 border-solid border-y text-xs">Built by Hestia 2024</p>
+        </section>
+
+
+    </div>
 
     <script src="../ts/app.js"></script>
 </body>
