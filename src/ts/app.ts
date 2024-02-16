@@ -1,12 +1,8 @@
-
-
-
 const box = document.querySelector(".box");
 const boxImg = document.querySelector(".img-box");
 const mealImage = document.querySelector("#meal-img-box") as HTMLElement;
 const cateBox = document.querySelector(".category-box");
 const moreDisplay = document.querySelector(".recipe-display-box");
-
 
 const mealCategory = document.querySelector(".meal-category");
 const mealName = document.querySelector(".meal-name");
@@ -15,7 +11,7 @@ const mealBlogLink = document.querySelector(".meal-src");
 
 // --------------
 interface RecipeBox {
-    meals: Recipe[]
+  meals: Recipe[];
 }
 
 interface Recipe {
@@ -76,18 +72,17 @@ interface Recipe {
 
 // =======-----------------------------
 function displayRecipe(info: RecipeBox) {
-//   boxImg.setAttribute("src", info?.strMealThumb);
+  //   boxImg.setAttribute("src", info?.strMealThumb);
 
   //   console.log(info?.strMealThumb);
 
- const data = info.meals[0]
+  const data = info.meals[0];
 
-  mealImage.style.backgroundImage = `url(${data?.strMealThumb})`
-mealCategory.textContent = data.strCategory
-mealName.textContent = data.strMeal
-mealGuide.textContent = `${data.strInstructions.slice(0, 400)}...`
-mealBlogLink.setAttribute('href', data.strSource)
-
+  mealImage.style.backgroundImage = `url(${data?.strMealThumb})`;
+  mealCategory.textContent = data.strCategory;
+  mealName.textContent = data.strMeal;
+  mealGuide.textContent = `${data.strInstructions.slice(0, 400)}...`;
+  mealBlogLink.setAttribute("href", data.strSource);
 }
 
 async function getRecipes() {
@@ -100,7 +95,7 @@ async function getRecipes() {
 
   //   displayRecipe(data.meals[0]);
 
-//   console.log(data);
+  //   console.log(data);
   return data;
 }
 
@@ -120,9 +115,9 @@ interface Category {
 
 function displayCategory(data: CategoryList) {
   // boxImg.setAttribute("src", info?.strMealThumb);
-//   console.log(data);
+  //   console.log(data);
 
-  let dataSpliced = data.categories?.splice(5, 8)
+  let dataSpliced = data.categories?.splice(5, 8);
   dataSpliced.forEach((item) => {
     // const html = `
 
@@ -132,21 +127,20 @@ function displayCategory(data: CategoryList) {
     //         ${item.strCategory}
     //     </div>
     // </div>
-    
+
     // `;
 
-
     const categoryHtml = `
-    <div class="h-20 w-full bg-slate-100 rounded-full bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-2 "
-        style="background-image: url('${item.strCategoryThumb}')">
+    <div class="h-20 w-full bg-gray-200 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 "
+    style="background-image: url('${item.strCategoryThumb}')">
 
-            <div
-                class="w-[90px] p-1 rounded-2xl bg-slate-400 text-center text-xs uppercase font-bold text-slate-200 ">
-                ${item.strCategory}
-            </div>
-        </div>
-    
-    `
+    <div
+        class="w-[90px] p-1 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200 ">
+        ${item.strCategory}
+    </div>
+</div>
+
+    `;
 
     // cateBox.innerHTML = html
     cateBox.insertAdjacentHTML("afterbegin", categoryHtml);
@@ -166,49 +160,46 @@ async function getCategories() {
 
 getCategories();
 
-
 // =============================
 // GET MEAL BY NAME
 // ============================
 async function getMeal() {
-    const response = await fetch(
-      "https://www.themealdb.com/api/json/v1/1/random.php",
-      { method: "GET" }
-    );
-  
-    const data = await response.json();
-  
-    displayRecipe(data);
-    // console.log(data)
-    return data;
-  }
-  
-  getMeal();
+  const response = await fetch(
+    "https://www.themealdb.com/api/json/v1/1/random.php",
+    { method: "GET" }
+  );
 
+  const data = await response.json();
+
+  displayRecipe(data);
+  // console.log(data)
+  return data;
+}
+
+getMeal();
 
 // ==========================
 
 // =============================
-  async function getMealByCategory() {
-    const response = await fetch(
-      "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood",
-      { method: "GET" }
-    );
+async function getMealByCategory() {
+  const response = await fetch(
+    "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood",
+    { method: "GET" }
+  );
 
-    const response2 = await fetch(
-        "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772",
-        { method: "GET" }
-      );
-  
-    const data = await response.json();
-    const data2 = await response2.json();
+  const response2 = await fetch(
+    "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772",
+    { method: "GET" }
+  );
 
-  
-    // displayRecipe(data);
-    // console.log(data)
-    // console.log(data2)
+  const data = await response.json();
+  const data2 = await response2.json();
 
-    return data;
-  }
-  
+  // displayRecipe(data);
+  // console.log(data)
+  // console.log(data2)
+
+  return data;
+}
+
 //   getMealByCategory();

@@ -7,6 +7,13 @@ export default {
     './src/ts/app.ts'
   ],
   theme: {
+    screens: {
+     'mb': '320px',
+     'sm': '600px',
+     'md': '1024px',
+     'lg': '1300px',
+     'xl': '1440px'
+    },
     fontSize: {
       'xs': '0.7rem',
       'xss': '0.88rem',

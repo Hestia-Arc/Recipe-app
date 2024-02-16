@@ -52,7 +52,7 @@ function displayRecipe(info) {
     mealCategory.textContent = data.strCategory;
     mealName.textContent = data.strMeal;
     mealGuide.textContent = "".concat(data.strInstructions.slice(0, 400), "...");
-    mealBlogLink.setAttribute('href', data.strSource);
+    mealBlogLink.setAttribute("href", data.strSource);
 }
 function getRecipes() {
     return __awaiter(this, void 0, void 0, function () {
@@ -86,7 +86,7 @@ function displayCategory(data) {
         //     </div>
         // </div>
         // `;
-        var categoryHtml = "\n    <div class=\"h-20 w-full bg-slate-100 rounded-full bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-2 \"\n        style=\"background-image: url('".concat(item.strCategoryThumb, "')\">\n\n            <div\n                class=\"w-[90px] p-1 rounded-2xl bg-slate-400 text-center text-xs uppercase font-bold text-slate-200 \">\n                ").concat(item.strCategory, "\n            </div>\n        </div>\n    \n    ");
+        var categoryHtml = "\n    <div class=\"h-20 w-full bg-gray-200 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 \"\n    style=\"background-image: url('".concat(item.strCategoryThumb, "')\">\n\n    <div\n        class=\"w-[90px] p-1 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200 \">\n        ").concat(item.strCategory, "\n    </div>\n</div>\n\n    ");
         // cateBox.innerHTML = html
         cateBox.insertAdjacentHTML("afterbegin", categoryHtml);
     });
