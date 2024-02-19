@@ -43,6 +43,9 @@ var mealCategory = document.querySelector(".meal-category");
 var mealName = document.querySelector(".meal-name");
 var mealGuide = document.querySelector(".meal-guide");
 var mealBlogLink = document.querySelector(".meal-src");
+var searchInput = document.querySelector('#search-input');
+var searchBtn = document.querySelector('#search-btn');
+var searchDisplayBox = document.querySelector('.search-result-box');
 // =======-----------------------------
 function displayRecipe(info) {
     //   boxImg.setAttribute("src", info?.strMealThumb);
@@ -91,6 +94,7 @@ function displayCategory(data) {
         cateBox.insertAdjacentHTML("afterbegin", categoryHtml);
     });
 }
+// --------------------------------------
 function getCategories() {
     return __awaiter(this, void 0, void 0, function () {
         var response, data;
@@ -108,7 +112,7 @@ function getCategories() {
         });
     });
 }
-getCategories();
+// -------------------------------------
 // =============================
 // GET MEAL BY NAME
 // ============================
@@ -130,7 +134,6 @@ function getMeal() {
         });
     });
 }
-getMeal();
 // ==========================
 // =============================
 function getMealByCategory() {
@@ -158,4 +161,41 @@ function getMealByCategory() {
         });
     });
 }
+// --------------------------------
+function displayResult(data) {
+    var _a;
+    (_a = data.meals) === null || _a === void 0 ? void 0 : _a.forEach(function (meal) {
+        var text = "<a href=\"./src/pages/RecipeInfo.html\"><div class=\"pt-2 pb-2 \">".concat(meal.strMeal, "</div></a>");
+        searchDisplayBox.insertAdjacentHTML("afterbegin", text);
+    });
+    // console.log(data)
+    var html = "\n  <div class=\"h-80 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 mb:max-sm:h-72\"\n  style=\"background-image: url('./src/images/img-1.jpg')\">\n\n\n    <div\n        class=\"w-[85%] h-20 p-1 rounded-md bg-gray-200 text-center text-xs capitalize relative\">\n        Breakfast\n\n        <div\n            class=\"w-[90px] p-1 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200 absolute top-[-1rem] left-1/3\">\n            Breakfast\n        </div>\n    </div>\n  </div>\n  ";
+}
+// -----------------------SEARCH MEAL
+function searchMeal() {
+    return __awaiter(this, void 0, void 0, function () {
+        var searchValue, response, data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    searchValue = searchInput.value;
+                    searchDisplayBox.classList.remove('hidden');
+                    return [4 /*yield*/, fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=".concat(searchValue), { method: "GET" })];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    data = _a.sent();
+                    displayResult(data);
+                    console.log(data);
+                    return [2 /*return*/, data];
+            }
+        });
+    });
+}
+// --------------------------
 //   getMealByCategory();
+// getRecipes();
+getCategories();
+getMeal();
+searchBtn.addEventListener('click', searchMeal);

@@ -8,9 +8,18 @@ const mealCategory = document.querySelector(".meal-category");
 const mealName = document.querySelector(".meal-name");
 const mealGuide = document.querySelector(".meal-guide");
 const mealBlogLink = document.querySelector(".meal-src");
+const searchInput = document.querySelector('#search-input') as HTMLInputElement
+const searchBtn = document.querySelector('#search-btn')
+const searchDisplayBox = document.querySelector('.search-result-box') as HTMLElement
+
+
 
 // --------------
 interface RecipeBox {
+  meals: Recipe[];
+}
+
+interface ResultBox {
   meals: Recipe[];
 }
 
@@ -70,6 +79,10 @@ interface Recipe {
   strYoutube: string;
 }
 
+
+
+
+
 // =======-----------------------------
 function displayRecipe(info: RecipeBox) {
   //   boxImg.setAttribute("src", info?.strMealThumb);
@@ -99,7 +112,6 @@ async function getRecipes() {
   return data;
 }
 
-// getRecipes();
 
 // --------------------------------CATEGORIES
 interface CategoryList {
@@ -146,6 +158,8 @@ function displayCategory(data: CategoryList) {
     cateBox.insertAdjacentHTML("afterbegin", categoryHtml);
   });
 }
+
+// --------------------------------------
 async function getCategories() {
   const response = await fetch(
     "https://www.themealdb.com/api/json/v1/1/categories.php",
@@ -157,8 +171,7 @@ async function getCategories() {
   displayCategory(data);
   return data;
 }
-
-getCategories();
+// -------------------------------------
 
 // =============================
 // GET MEAL BY NAME
@@ -176,7 +189,6 @@ async function getMeal() {
   return data;
 }
 
-getMeal();
 
 // ==========================
 
@@ -202,4 +214,62 @@ async function getMealByCategory() {
   return data;
 }
 
+// --------------------------------
+function displayResult(data:ResultBox) {
+
+  data.meals?.forEach(meal => {
+
+    const text = `<a href="./src/pages/RecipeInfo.html"><div class="pt-2 pb-2 ">${meal.strMeal}</div></a>`
+    
+
+    searchDisplayBox.insertAdjacentHTML("afterbegin", text);
+  })
+ 
+
+
+
+// console.log(data)
+  const html = `
+  <div class="h-80 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 mb:max-sm:h-72"
+  style="background-image: url('./src/images/img-1.jpg')">
+
+
+    <div
+        class="w-[85%] h-20 p-1 rounded-md bg-gray-200 text-center text-xs capitalize relative">
+        Breakfast
+
+        <div
+            class="w-[90px] p-1 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200 absolute top-[-1rem] left-1/3">
+            Breakfast
+        </div>
+    </div>
+  </div>
+  `
+}
+
+// -----------------------SEARCH MEAL
+async function searchMeal() {
+  let searchValue = searchInput.value;
+  searchDisplayBox.classList.remove('hidden')
+  // searchDisplayBox.classList.add('block')
+
+  const response = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`,
+    { method: "GET" }
+  );
+
+  const data = await response.json()
+  displayResult(data)
+  console.log(data)
+
+  return data
+}
+
+
+// --------------------------
 //   getMealByCategory();
+// getRecipes();
+getCategories();
+getMeal();
+searchBtn.addEventListener('click', searchMeal)
+

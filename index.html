@@ -37,11 +37,12 @@
                         recipes</h2>
                 </div>
 
-                <div class="h-11 flex gap-1 items-center mt-4 mb:max-sm:h-7">
-                    <input type="text" placeholder="Find a recipe..."
+                <div class="h-11 relative flex gap-1 items-center mt-4 mb:max-sm:h-7">
+                    <!-- <form  class=""> -->
+                    <input type="text" id="search-input" placeholder="Find a recipe..."
                         class="bg-slate-50 h-11 w-[19rem] border-2 border-solid border-slate-100 outline-none p-3 mb:max-sm:w-64">
-                        <a href="./src/pages/RecipeInfo.html">
-                        <button type="submit"
+                        <!-- <a href="./src/pages/RecipeInfo.html"> -->
+                        <button type="submit" id="search-btn"
                         class="bg-slate-500 h-11 rounded-[2px]  px-3 font-semibold text-slate-100 text-[1.2rem] border-solid border-[1.5px] border-gray-400 "><svg
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
                             stroke="currentColor" class="w-6 h-6">
@@ -49,7 +50,10 @@
                                 d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
                     </button>
-                    </a>
+                    <!-- </a> -->
+                <!-- </form> -->
+                <div class="search-result-box hidden absolute h-40 w-full overflow-auto top-10 flex flex-col divide-solid divide-gray-300 divide-y-[1px]  bg-gray-200 text-xs p-3 lg:top-16"></div>
+
                 </div>
 
                 <div class="text-xss text-slate-100 text-center mt-3">
@@ -150,7 +154,7 @@
                         class="text-[1.2rem] text-slate-100 text-center font-bold bg-gray-600 p-3 capitalize mb:max-sm:text-xss ">
                         categories</h3>
 
-                    <div class="flex flex-col gap-4 p-5 category-box">
+                    <div class="flex flex-col gap-2 p-5 category-box">
                         <div class="h-20 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 "
                             style="background-image: url('./src/images/img-1.jpg')">
 

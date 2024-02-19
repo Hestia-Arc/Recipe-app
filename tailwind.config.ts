@@ -4,6 +4,7 @@ export default {
   content: [
     './index.html',
     './src/pages/RecipeInfo.html',
+    './src/pages/SearchResult.html',
     './src/ts/app.ts'
   ],
   theme: {
