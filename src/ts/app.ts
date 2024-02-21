@@ -1,17 +1,26 @@
 const box = document.querySelector(".box");
 const boxImg = document.querySelector(".img-box");
+const randomBox = document.querySelector(".random-box") as HTMLElement;
 const mealImage = document.querySelector("#meal-img-box") as HTMLElement;
-const cateBox = document.querySelector(".category-box");
+const cateBox = document.querySelector(".category-box") as HTMLElement;
 const moreDisplay = document.querySelector(".recipe-display-box");
 
-const mealCategory = document.querySelector(".meal-category");
-const mealName = document.querySelector(".meal-name");
-const mealGuide = document.querySelector(".meal-guide");
-const mealBlogLink = document.querySelector(".meal-src");
-const searchInput = document.querySelector('#search-input') as HTMLInputElement
-const searchBtn = document.querySelector('#search-btn')
-const searchDisplayBox = document.querySelector('.search-result-box') as HTMLElement
+const mealCategory = document.querySelector(".meal-category") as HTMLElement;
+const mealName = document.querySelector(".meal-name") as HTMLElement;
+const mealGuide = document.querySelector(".meal-guide") as HTMLElement;
+const mealBlogLink = document.querySelector(".meal-src") as HTMLElement;
+const searchInput = document.querySelector("#search-input") as HTMLInputElement;
+const searchBtn = document.querySelector("#search-btn") as HTMLElement;
+const searchDisplayBox = document.querySelector(
+  ".search-result-box"
+) as HTMLElement;
 
+const sBox = document.querySelector(".s-box") as HTMLElement;
+const itemName = document.querySelector(".item-name") as HTMLElement;
+const detailImage = document.querySelector("#item-img-box") as HTMLElement;
+const itemMethod = document.querySelector(".item-method") as HTMLElement;
+const itemIngredient = document.querySelector(".item-ingredient") as HTMLElement;
+const itemVideo = document.querySelector(".item-video") as HTMLElement;
 
 
 // --------------
@@ -79,10 +88,6 @@ interface Recipe {
   strYoutube: string;
 }
 
-
-
-
-
 // =======-----------------------------
 function displayRecipe(info: RecipeBox) {
   //   boxImg.setAttribute("src", info?.strMealThumb);
@@ -111,7 +116,6 @@ async function getRecipes() {
   //   console.log(data);
   return data;
 }
-
 
 // --------------------------------CATEGORIES
 interface CategoryList {
@@ -189,7 +193,6 @@ async function getMeal() {
   return data;
 }
 
-
 // ==========================
 
 // =============================
@@ -215,20 +218,91 @@ async function getMealByCategory() {
 }
 
 // --------------------------------
-function displayResult(data:ResultBox) {
+async function displaySingleSearchDetails(id: string) {
+  console.log(id);
+  randomBox.classList.add("hidden");
+  sBox.classList.remove("hidden");
+  sBox.setAttribute("id", id);
 
-  data.meals?.forEach(meal => {
+  
 
-    const text = `<a href="./src/pages/RecipeInfo.html"><div class="pt-2 pb-2 ">${meal.strMeal}</div></a>`
-    
+  const response = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
+    { method: "GET" }
+  );
 
-    searchDisplayBox.insertAdjacentHTML("afterbegin", text);
-  })
- 
+  const dataObj: RecipeBox = await response.json();
+  let data = dataObj.meals[0];
+  let slicedLink = data.strYoutube.slice(32, 43)
+  let itemBox = document.createElement("div")
+  let items = `
+  <ul class="flex flex-col gap-3">
+    <li> ${data.strMeasure1} ${data.strIngredient1} </li>
+    <li> ${data.strMeasure2} ${data.strIngredient2} </li>
+    <li> ${data.strMeasure3} ${data.strIngredient3} </li>
+    <li> ${data.strMeasure4} ${data.strIngredient4} </li>
+    <li> ${data.strMeasure5} ${data.strIngredient5} </li>
+    <li> ${data.strMeasure6} ${data.strIngredient6} </li>
+    <li> ${data.strMeasure7} ${data.strIngredient7} </li>
+    <li> ${data.strMeasure8} ${data.strIngredient8} </li>
+    <li> ${data.strMeasure9} ${data?.strIngredient9} </li>
+    <li> ${data.strMeasure10} ${data.strIngredient10} </li>
+    <li> ${data.strMeasure11} ${data.strIngredient11} </li>
+    <li> ${data.strMeasure12} ${data.strIngredient12} </li>
+    <li> ${data.strMeasure13} ${data.strIngredient13} </li> 
+    <li> ${data.strMeasure14} ${data.strIngredient14} </li>
+    <li> ${data.strMeasure15} ${data.strIngredient15} </li>
+     <li> ${data?.strMeasure16} ${data.strIngredient16} </li>
+    <li> ${data?.strMeasure17} ${data.strIngredient17} </li>
+     <li> ${data?.strMeasure18} ${data.strIngredient18} </li>
+    <li> ${data?.strMeasure19} ${data.strIngredient19} </li> 
+    <li> ${data?.strMeasure20} ${data.strIngredient20} </li>
+
+  </ul>
+  `
+  console.log(data);
+
+  itemName.textContent = data.strMeal;
+  detailImage.style.backgroundImage = `url(${data?.strMealThumb})`;
+  itemMethod.textContent = data.strInstructions;
+  itemVideo.setAttribute("src", `https://www.youtube.com/embed/${slicedLink}`)
+  itemBox.innerHTML = items
+  itemIngredient.appendChild(itemBox)
 
 
+  console.log(slicedLink)
+  return data;
+}
 
-// console.log(data)
+function displayResult(data: ResultBox) {
+  if (data.meals == null) {
+    console.log("no results");
+  }
+
+  data.meals?.forEach((meal) => {
+    let item = document.createElement("a");
+    item.setAttribute("href", "./src/pages/RecipeInfo.html");
+    // item.setAttribute("href", "./src/pages/RecipeInfo.html");
+    item.setAttribute(
+      "onclick",
+      `displaySingleSearchDetails('${meal.idMeal}')`
+    );
+
+    // item.setAttribute('onclick', `displaySingleSearchDetails('${meal.idMeal}')`)
+
+    let text = `
+    <a href="#${Number(meal.idMeal)}">
+    <div class="s-box pt-2 pb-2">
+    ${meal.strMeal}</div>
+    </a>
+    `;
+
+    item.innerHTML = text;
+
+    searchDisplayBox.appendChild(item);
+  });
+
+  // console.log(data)
   const html = `
   <div class="h-80 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 mb:max-sm:h-72"
   style="background-image: url('./src/images/img-1.jpg')">
@@ -244,32 +318,42 @@ function displayResult(data:ResultBox) {
         </div>
     </div>
   </div>
-  `
+  `;
 }
 
 // -----------------------SEARCH MEAL
 async function searchMeal() {
   let searchValue = searchInput.value;
-  searchDisplayBox.classList.remove('hidden')
-  // searchDisplayBox.classList.add('block')
+  searchDisplayBox.classList.remove("hidden");
 
   const response = await fetch(
     `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`,
     { method: "GET" }
   );
 
-  const data = await response.json()
-  displayResult(data)
-  console.log(data)
+  const data = await response.json();
+  displayResult(data);
+  // console.log(data);
 
-  return data
+  return data;
 }
 
-
-// --------------------------
+// -------------------------
 //   getMealByCategory();
 // getRecipes();
 getCategories();
 getMeal();
-searchBtn.addEventListener('click', searchMeal)
+searchBtn.addEventListener("click", searchMeal);
 
+// -------------------------------------------------------------------
+// let text = `
+// <a href="./src/pages/RecipeInfo.html">
+// <div data-id="${meal.idMeal}" class="s-box pt-2 pb-2 "
+//  onclick="() => ${displaySingleSearchDetails}">
+// ${meal.strMeal}</div>
+// </a>
+// `;
+
+// const text = `<a href="./src/pages/RecipeInfo.html"><div class="pt-2 pb-2 ">${meal.strMeal}</div></a>`
+
+// searchDisplayBox.insertAdjacentHTML("afterbegin", text);

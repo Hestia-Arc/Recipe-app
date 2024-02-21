@@ -14,7 +14,9 @@
     <div>
         <nav
             class="h-20 flex justify-between items-center bg-gray-200 px-20 mb:max-sm:px-2 sm:max-md:px-4 mb:max-sm:h-16">
-            <div class="h-full bg-gray-600 text-slate-100 text-1xs text-center p-3 leading-6 mb:max-sm:text-[1rem] mb:max-sm:py-2">Food<br> Recipes</div>
+            <div
+                class="h-full bg-gray-600 text-slate-100 text-1xs text-center p-3 leading-6 mb:max-sm:text-[1rem] mb:max-sm:py-2">
+                Food<br> Recipes</div>
 
             <ul class="flex justify-between w-1/4 font-bold uppercase text-xs mb:max-sm:hidden">
                 <li class="">Basics</li>
@@ -41,8 +43,8 @@
                     <!-- <form  class=""> -->
                     <input type="text" id="search-input" placeholder="Find a recipe..."
                         class="bg-slate-50 h-11 w-[19rem] border-2 border-solid border-slate-100 outline-none p-3 mb:max-sm:w-64">
-                        <!-- <a href="./src/pages/RecipeInfo.html"> -->
-                        <button type="submit" id="search-btn"
+                    <!-- <a href="./src/pages/RecipeInfo.html"> -->
+                    <button type="submit" id="search-btn"
                         class="bg-slate-500 h-11 rounded-[2px]  px-3 font-semibold text-slate-100 text-[1.2rem] border-solid border-[1.5px] border-gray-400 "><svg
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
                             stroke="currentColor" class="w-6 h-6">
@@ -51,8 +53,10 @@
                         </svg>
                     </button>
                     <!-- </a> -->
-                <!-- </form> -->
-                <div class="search-result-box hidden absolute h-40 w-full overflow-auto top-10 flex flex-col divide-solid divide-gray-300 divide-y-[1px]  bg-gray-200 text-xs p-3 lg:top-16"></div>
+                    <!-- </form> -->
+                    <div
+                        class="search-result-box hidden absolute h-40 w-full overflow-auto top-6 flex flex-col divide-solid divide-gray-300 divide-y-[1px]  bg-gray-200 text-xs p-3 lg:top-16">
+                    </div>
 
                 </div>
 
@@ -74,9 +78,54 @@
 
 
         <!-- ================= -->
+        <!-- SEARCHED MEAL -->
+        <!-- =============== -->
+        <section class="s-box hidden bg-grey-50 mt-20">
+            <!-- ======================= -->
+            <!-- GRID -->
+            <!-- ======================= -->
+            <div class="min-h-[500px] mb-10 px-40 grid grid-cols-12 gap-10">
+
+                <div class=" h-full col-span-8 flex flex-col gap-3 ">
+                    <h2 class="item-name capitalize text-1xs text-slate-700 font-bold">...</h2>
+
+                    <div id='item-img-box' class=" h-96  rounded-md bg-gray-400 bg-center bg-no-repeat bg-cover">
+                    </div>
+
+                    <h3
+                        class="text-[1.2rem] font-bold text-slate-700 pb-1 mt-2 border-solid border-b-[1px] border-gray-300">
+                        Method</h3>
+
+                        <div class="item-method text-xss"></div>
+                </div>
+
+                <!-- ======================= -->
+                <!-- SIDE -->
+                <!-- ======================= -->
+                <div class=" h-full col-span-4 ">
+                    <!-- VIDEO -->
+                    <div class="h-[200px] mt-12 rounded border-solid border-[1px] border-slate-200">
+                        <iframe src="" class="item-video h-full w-full rounded"></iframe>
+                    </div>
+
+
+                    <!-- INGREDIENTS -->
+                    <div class="min-h-[400px] mt-4 bg-gray-200">
+                        <h2 class="px-3 py-3 capitalize bg-gray-600 text-[1.2rem] text-slate-100 font-bold">Ingredients
+                        </h2>
+
+                        <div class="item-ingredient px-3 mt-3 mb-3 text-xss"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= -->
         <!-- RANDOM MEAL -->
         <!-- =============== -->
-        <section class="px-20 mt-20 mb:max-sm:px-4 mb:max-sm:mt-16 ">
+        <section class=" random-box px-20 mt-20 mb:max-sm:px-4 mb:max-sm:mt-16 ">
             <h3 class="text-1xs border-solid border-b-2">Popular from other blogs</h3>
 
             <div class="flex gap-4 mt-4 mb:max-sm:flex-wrap">

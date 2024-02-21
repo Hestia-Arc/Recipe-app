@@ -572,6 +572,10 @@ video {
   top: 2.5rem;
 }
 
+.top-6 {
+  top: 1.5rem;
+}
+
 .col-span-4 {
   grid-column: span 4 / span 4;
 }
@@ -635,6 +639,10 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
 }
 
 .block {
@@ -723,6 +731,10 @@ video {
 
 .min-h-20 {
   min-height: 5rem;
+}
+
+.min-h-\[400px\] {
+  min-height: 400px;
 }
 
 .w-1\/4 {
@@ -895,12 +907,20 @@ video {
   border-radius: 0.125rem;
 }
 
+.rounded {
+  border-radius: 0.25rem;
+}
+
 .border-2 {
   border-width: 2px;
 }
 
 .border-\[1\.5px\] {
   border-width: 1.5px;
+}
+
+.border-\[1px\] {
+  border-width: 1px;
 }
 
 .border-y {
@@ -1054,6 +1074,16 @@ video {
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.px-32 {
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
+
+.px-40 {
+  padding-left: 10rem;
+  padding-right: 10rem;
 }
 
 .pb-1 {

@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var box = document.querySelector(".box");
 var boxImg = document.querySelector(".img-box");
+var randomBox = document.querySelector(".random-box");
 var mealImage = document.querySelector("#meal-img-box");
 var cateBox = document.querySelector(".category-box");
 var moreDisplay = document.querySelector(".recipe-display-box");
@@ -43,9 +44,15 @@ var mealCategory = document.querySelector(".meal-category");
 var mealName = document.querySelector(".meal-name");
 var mealGuide = document.querySelector(".meal-guide");
 var mealBlogLink = document.querySelector(".meal-src");
-var searchInput = document.querySelector('#search-input');
-var searchBtn = document.querySelector('#search-btn');
-var searchDisplayBox = document.querySelector('.search-result-box');
+var searchInput = document.querySelector("#search-input");
+var searchBtn = document.querySelector("#search-btn");
+var searchDisplayBox = document.querySelector(".search-result-box");
+var sBox = document.querySelector(".s-box");
+var itemName = document.querySelector(".item-name");
+var detailImage = document.querySelector("#item-img-box");
+var itemMethod = document.querySelector(".item-method");
+var itemIngredient = document.querySelector(".item-ingredient");
+var itemVideo = document.querySelector(".item-video");
 // =======-----------------------------
 function displayRecipe(info) {
     //   boxImg.setAttribute("src", info?.strMealThumb);
@@ -162,11 +169,53 @@ function getMealByCategory() {
     });
 }
 // --------------------------------
+function displaySingleSearchDetails(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, dataObj, data, slicedLink, itemBox, items;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    console.log(id);
+                    randomBox.classList.add("hidden");
+                    sBox.classList.remove("hidden");
+                    sBox.setAttribute("id", id);
+                    return [4 /*yield*/, fetch("https://www.themealdb.com/api/json/v1/1/lookup.php?i=".concat(id), { method: "GET" })];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    dataObj = _a.sent();
+                    data = dataObj.meals[0];
+                    slicedLink = data.strYoutube.slice(32, 43);
+                    itemBox = document.createElement("div");
+                    items = "\n  <ul class=\"flex flex-col gap-3\">\n    <li> ".concat(data.strMeasure1, " ").concat(data.strIngredient1, " </li>\n    <li> ").concat(data.strMeasure2, " ").concat(data.strIngredient2, " </li>\n    <li> ").concat(data.strMeasure3, " ").concat(data.strIngredient3, " </li>\n    <li> ").concat(data.strMeasure4, " ").concat(data.strIngredient4, " </li>\n    <li> ").concat(data.strMeasure5, " ").concat(data.strIngredient5, " </li>\n    <li> ").concat(data.strMeasure6, " ").concat(data.strIngredient6, " </li>\n    <li> ").concat(data.strMeasure7, " ").concat(data.strIngredient7, " </li>\n    <li> ").concat(data.strMeasure8, " ").concat(data.strIngredient8, " </li>\n    <li> ").concat(data.strMeasure9, " ").concat(data === null || data === void 0 ? void 0 : data.strIngredient9, " </li>\n    <li> ").concat(data.strMeasure10, " ").concat(data.strIngredient10, " </li>\n    <li> ").concat(data.strMeasure11, " ").concat(data.strIngredient11, " </li>\n    <li> ").concat(data.strMeasure12, " ").concat(data.strIngredient12, " </li>\n    <li> ").concat(data.strMeasure13, " ").concat(data.strIngredient13, " </li> \n    <li> ").concat(data.strMeasure14, " ").concat(data.strIngredient14, " </li>\n    <li> ").concat(data.strMeasure15, " ").concat(data.strIngredient15, " </li>\n     <li> ").concat(data === null || data === void 0 ? void 0 : data.strMeasure16, " ").concat(data.strIngredient16, " </li>\n    <li> ").concat(data === null || data === void 0 ? void 0 : data.strMeasure17, " ").concat(data.strIngredient17, " </li>\n     <li> ").concat(data === null || data === void 0 ? void 0 : data.strMeasure18, " ").concat(data.strIngredient18, " </li>\n    <li> ").concat(data === null || data === void 0 ? void 0 : data.strMeasure19, " ").concat(data.strIngredient19, " </li> \n    <li> ").concat(data === null || data === void 0 ? void 0 : data.strMeasure20, " ").concat(data.strIngredient20, " </li>\n\n  </ul>\n  ");
+                    console.log(data);
+                    itemName.textContent = data.strMeal;
+                    detailImage.style.backgroundImage = "url(".concat(data === null || data === void 0 ? void 0 : data.strMealThumb, ")");
+                    itemMethod.textContent = data.strInstructions;
+                    itemVideo.setAttribute("src", "https://www.youtube.com/embed/".concat(slicedLink));
+                    itemBox.innerHTML = items;
+                    itemIngredient.appendChild(itemBox);
+                    console.log(slicedLink);
+                    return [2 /*return*/, data];
+            }
+        });
+    });
+}
 function displayResult(data) {
     var _a;
+    if (data.meals == null) {
+        console.log("no results");
+    }
     (_a = data.meals) === null || _a === void 0 ? void 0 : _a.forEach(function (meal) {
-        var text = "<a href=\"./src/pages/RecipeInfo.html\"><div class=\"pt-2 pb-2 \">".concat(meal.strMeal, "</div></a>");
-        searchDisplayBox.insertAdjacentHTML("afterbegin", text);
+        var item = document.createElement("a");
+        item.setAttribute("href", "./src/pages/RecipeInfo.html");
+        // item.setAttribute("href", "./src/pages/RecipeInfo.html");
+        item.setAttribute("onclick", "displaySingleSearchDetails('".concat(meal.idMeal, "')"));
+        // item.setAttribute('onclick', `displaySingleSearchDetails('${meal.idMeal}')`)
+        var text = "\n    <a href=\"#".concat(Number(meal.idMeal), "\">\n    <div class=\"s-box pt-2 pb-2\">\n    ").concat(meal.strMeal, "</div>\n    </a>\n    ");
+        item.innerHTML = text;
+        searchDisplayBox.appendChild(item);
     });
     // console.log(data)
     var html = "\n  <div class=\"h-80 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 mb:max-sm:h-72\"\n  style=\"background-image: url('./src/images/img-1.jpg')\">\n\n\n    <div\n        class=\"w-[85%] h-20 p-1 rounded-md bg-gray-200 text-center text-xs capitalize relative\">\n        Breakfast\n\n        <div\n            class=\"w-[90px] p-1 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200 absolute top-[-1rem] left-1/3\">\n            Breakfast\n        </div>\n    </div>\n  </div>\n  ";
@@ -179,7 +228,7 @@ function searchMeal() {
             switch (_a.label) {
                 case 0:
                     searchValue = searchInput.value;
-                    searchDisplayBox.classList.remove('hidden');
+                    searchDisplayBox.classList.remove("hidden");
                     return [4 /*yield*/, fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=".concat(searchValue), { method: "GET" })];
                 case 1:
                     response = _a.sent();
@@ -187,15 +236,25 @@ function searchMeal() {
                 case 2:
                     data = _a.sent();
                     displayResult(data);
-                    console.log(data);
+                    // console.log(data);
                     return [2 /*return*/, data];
             }
         });
     });
 }
-// --------------------------
+// -------------------------
 //   getMealByCategory();
 // getRecipes();
 getCategories();
 getMeal();
-searchBtn.addEventListener('click', searchMeal);
+searchBtn.addEventListener("click", searchMeal);
+// -------------------------------------------------------------------
+// let text = `
+// <a href="./src/pages/RecipeInfo.html">
+// <div data-id="${meal.idMeal}" class="s-box pt-2 pb-2 "
+//  onclick="() => ${displaySingleSearchDetails}">
+// ${meal.strMeal}</div>
+// </a>
+// `;
+// const text = `<a href="./src/pages/RecipeInfo.html"><div class="pt-2 pb-2 ">${meal.strMeal}</div></a>`
+// searchDisplayBox.insertAdjacentHTML("afterbegin", text);
