@@ -39,9 +39,9 @@
                         recipes</h2>
                 </div>
 
-                <div class="h-11 relative flex gap-1 items-center mt-4 mb:max-sm:h-7">
-                    <!-- <form  class=""> -->
-                    <input type="text" id="search-input" placeholder="Find a recipe..."
+                <div class="h-11 relative mt-4 mb:max-sm:h-7">
+                    <form id="form-box" class="flex gap-1 items-center">
+                    <input type="search" id="search-input" placeholder="Find a recipe..."
                         class="bg-slate-50 h-11 w-[19rem] border-2 border-solid border-slate-100 outline-none p-3 mb:max-sm:w-64">
                     <!-- <a href="./src/pages/RecipeInfo.html"> -->
                     <button type="submit" id="search-btn"
@@ -53,7 +53,7 @@
                         </svg>
                     </button>
                     <!-- </a> -->
-                    <!-- </form> -->
+                    </form>
                     <div
                         class="search-result-box hidden absolute h-40 w-full overflow-auto top-6 flex flex-col divide-solid divide-gray-300 divide-y-[1px]  bg-gray-200 text-xs p-3 lg:top-16">
                     </div>
@@ -148,7 +148,7 @@
                                 <h3 class="meal-name text-1xs font-semibold uppercase mb:max-sm:text-[1.2rem]">Delicious
                                     creamy smoothie</h3>
 
-                                <p class="meal-guide text-xss mb:max-sm:text-[0.8rem]">Then we are layering the puff
+                                <p class="meal-guide text-gray-400 text-xss mb:max-sm:text-[0.8rem]">Then we are layering the puff
                                     pastry with a quick schmear
                                     of
                                     creamy
@@ -203,14 +203,14 @@
                         class="text-[1.2rem] text-slate-100 text-center font-bold bg-gray-600 p-3 capitalize mb:max-sm:text-xss ">
                         categories</h3>
 
-                    <div class="flex flex-col gap-2 p-5 category-box">
+                    <div class="flex flex-col gap-1 mt-1 category-box">
                         <div class="h-20 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 "
                             style="background-image: url('./src/images/img-1.jpg')">
 
-                            <div
+                            <!-- <div
                                 class="w-[90px] p-1 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200 ">
                                 Breakfast
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 

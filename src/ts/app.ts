@@ -6,7 +6,7 @@ const cateBox = document.querySelector(".category-box") as HTMLElement;
 const moreDisplay = document.querySelector(".recipe-display-box");
 
 const mealCategory = document.querySelector(".meal-category") as HTMLElement;
-const mealName = document.querySelector(".meal-name") as HTMLElement;
+const mealName = document.querySelector(".meal-name");
 const mealGuide = document.querySelector(".meal-guide") as HTMLElement;
 const mealBlogLink = document.querySelector(".meal-src") as HTMLElement;
 const searchInput = document.querySelector("#search-input") as HTMLInputElement;
@@ -14,14 +14,17 @@ const searchBtn = document.querySelector("#search-btn") as HTMLElement;
 const searchDisplayBox = document.querySelector(
   ".search-result-box"
 ) as HTMLElement;
+const formBox = document.querySelector("#form-box") as HTMLElement;
+
 
 const sBox = document.querySelector(".s-box") as HTMLElement;
 const itemName = document.querySelector(".item-name") as HTMLElement;
 const detailImage = document.querySelector("#item-img-box") as HTMLElement;
 const itemMethod = document.querySelector(".item-method") as HTMLElement;
-const itemIngredient = document.querySelector(".item-ingredient") as HTMLElement;
+const itemIngredient = document.querySelector(
+  ".item-ingredient"
+) as HTMLElement;
 const itemVideo = document.querySelector(".item-video") as HTMLElement;
-
 
 // --------------
 interface RecipeBox {
@@ -60,7 +63,7 @@ interface Recipe {
   strIngredient18: null;
   strIngredient19: null;
   strIngredient20: null;
-  strInstructions: "Bring a large pot of water to a boil. Add kosher salt to the boiling water, then add the pasta. Cook according to the package instructions, about 9 minutes.\r\nIn a large skillet over medium-high heat, add the olive oil and heat until the oil starts to shimmer. Add the garlic and cook, stirring, until fragrant, 1 to 2 minutes. Add the chopped tomatoes, red chile flakes, Italian seasoning and salt and pepper to taste. Bring to a boil and cook for 5 minutes. Remove from the heat and add the chopped basil.\r\nDrain the pasta and add it to the sauce. Garnish with Parmigiano-Reggiano flakes and more basil and serve warm.";
+  strInstructions: string;
   strMeal: string;
   strMealThumb: string;
   strMeasure1: "1 pound";
@@ -92,14 +95,21 @@ interface Recipe {
 function displayRecipe(info: RecipeBox) {
   //   boxImg.setAttribute("src", info?.strMealThumb);
 
-  //   console.log(info?.strMealThumb);
+  // console.log(info.meals[0]);
 
   const data = info.meals[0];
+
+  if (!data.strInstructions || !data.strInstructions) {
+    return;
+  }
+
+  let guide = data.strInstructions?.slice(0, 300).replace(/\./g, '. <br>-');
 
   mealImage.style.backgroundImage = `url(${data?.strMealThumb})`;
   mealCategory.textContent = data.strCategory;
   mealName.textContent = data.strMeal;
-  mealGuide.textContent = `${data.strInstructions.slice(0, 400)}...`;
+  mealGuide.innerHTML = `${guide}...`;
+
   mealBlogLink.setAttribute("href", data.strSource);
 }
 
@@ -133,7 +143,12 @@ function displayCategory(data: CategoryList) {
   // boxImg.setAttribute("src", info?.strMealThumb);
   //   console.log(data);
 
-  let dataSpliced = data.categories?.splice(5, 8);
+  if (!data.categories || !data.categories.length) {
+    return;
+  }
+
+  let dataSpliced = data.categories?.slice(5, 15);
+
   dataSpliced.forEach((item) => {
     // const html = `
 
@@ -147,11 +162,11 @@ function displayCategory(data: CategoryList) {
     // `;
 
     const categoryHtml = `
-    <div class="h-20 w-full bg-gray-200 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 "
+    <div class="h-[4rem] w-full bg-gray-200 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-center items-end pr-3 "
     style="background-image: url('${item.strCategoryThumb}')">
 
     <div
-        class="w-[90px] p-1 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200 ">
+        class="w-[fit] py-[1.5px] px-3 rounded-xl bg-gray-100 text-center text-[0.65rem] uppercase font-[400] text-gray-900 ">
         ${item.strCategory}
     </div>
 </div>
@@ -189,7 +204,7 @@ async function getMeal() {
   const data = await response.json();
 
   displayRecipe(data);
-  // console.log(data)
+  // console.log(data);
   return data;
 }
 
@@ -219,23 +234,39 @@ async function getMealByCategory() {
 
 // --------------------------------
 async function displaySingleSearchDetails(id: string) {
-  console.log(id);
+  // console.log(id);
   randomBox.classList.add("hidden");
   sBox.classList.remove("hidden");
   sBox.setAttribute("id", id);
 
-  
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
+      { method: "GET" }
+    );
 
-  const response = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
-    { method: "GET" }
-  );
+    const dataResponse: RecipeBox = await response.json();
 
-  const dataObj: RecipeBox = await response.json();
-  let data = dataObj.meals[0];
-  let slicedLink = data.strYoutube.slice(32, 43)
-  let itemBox = document.createElement("div")
-  let items = `
+    let data = dataResponse?.meals[0]
+    // console.log(data);
+
+
+    if (!data.strYoutube || !data.strYoutube.length) {
+      // return;
+   
+      itemVideo.setAttribute(
+        "src",
+        ""
+      );
+    }
+
+    // if (!data.strInstructions || !data.strInstructions.length) {
+    //   return;
+    // }
+
+    let slicedLink = data.strYoutube?.slice(32, 43);
+    let guideWithNewLines = data.strInstructions?.replace(/\./g, '. <br>-')
+    let items = `
   <ul class="flex flex-col gap-3">
     <li> ${data.strMeasure1} ${data.strIngredient1} </li>
     <li> ${data.strMeasure2} ${data.strIngredient2} </li>
@@ -259,19 +290,23 @@ async function displaySingleSearchDetails(id: string) {
     <li> ${data?.strMeasure20} ${data.strIngredient20} </li>
 
   </ul>
-  `
-  console.log(data);
+  `;
 
-  itemName.textContent = data.strMeal;
-  detailImage.style.backgroundImage = `url(${data?.strMealThumb})`;
-  itemMethod.textContent = data.strInstructions;
-  itemVideo.setAttribute("src", `https://www.youtube.com/embed/${slicedLink}`)
-  itemBox.innerHTML = items
-  itemIngredient.appendChild(itemBox)
+    itemName.textContent = data.strMeal;
+    detailImage.style.backgroundImage = `url(${data?.strMealThumb})`;
+    itemMethod.innerHTML = guideWithNewLines;
+    itemVideo.setAttribute(
+      "src",
+      `https://www.youtube.com/embed/${slicedLink}`
+    );
+    // itemBox.innerHTML = items
+    itemIngredient.innerHTML = items;
 
-
-  console.log(slicedLink)
-  return data;
+    // console.log(slicedLink);
+    return data;
+  } catch (err) {
+    console.log(err.message);
+  }
 }
 
 function displayResult(data: ResultBox) {
@@ -322,7 +357,8 @@ function displayResult(data: ResultBox) {
 }
 
 // -----------------------SEARCH MEAL
-async function searchMeal() {
+async function searchMeal(e) {
+  e.preventDefault()
   let searchValue = searchInput.value;
   searchDisplayBox.classList.remove("hidden");
 
@@ -343,7 +379,9 @@ async function searchMeal() {
 // getRecipes();
 getCategories();
 getMeal();
-searchBtn.addEventListener("click", searchMeal);
+formBox.addEventListener("submit", searchMeal);
+
+// searchBtn.addEventListener("click", searchMeal);
 
 // -------------------------------------------------------------------
 // let text = `
