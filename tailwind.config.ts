@@ -9,11 +9,11 @@ export default {
   ],
   theme: {
     screens: {
-     'mb': '320px',
-     'sm': '600px',
-     'md': '1024px',
-     'lg': '1300px',
-     'xl': '1440px'
+     'mb': {'min': '320px', 'max': '599px'},
+     'sm': {'min': '600px', 'max': '1023px' },
+     'md': {'min': '1024px', 'max': '1299px'},
+     'lg': {'min': '1300px', },
+     'xl': {'min': '1440px' }
     },
     fontSize: {
       'xs': '0.7rem',

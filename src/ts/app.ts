@@ -317,7 +317,6 @@ function displayResult(data: ResultBox) {
   data.meals?.forEach((meal) => {
     let item = document.createElement("a");
     item.setAttribute("href", "./src/pages/RecipeInfo.html");
-    // item.setAttribute("href", "./src/pages/RecipeInfo.html");
     item.setAttribute(
       "onclick",
       `displaySingleSearchDetails('${meal.idMeal}')`
@@ -361,6 +360,9 @@ async function searchMeal(e) {
   e.preventDefault()
   let searchValue = searchInput.value;
   searchDisplayBox.classList.remove("hidden");
+  searchDisplayBox.classList.add("flex")
+  searchDisplayBox.classList.add("flex-col")
+
 
   const response = await fetch(
     `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`,

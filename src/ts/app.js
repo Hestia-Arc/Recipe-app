@@ -232,7 +232,6 @@ function displayResult(data) {
     (_a = data.meals) === null || _a === void 0 ? void 0 : _a.forEach(function (meal) {
         var item = document.createElement("a");
         item.setAttribute("href", "./src/pages/RecipeInfo.html");
-        // item.setAttribute("href", "./src/pages/RecipeInfo.html");
         item.setAttribute("onclick", "displaySingleSearchDetails('".concat(meal.idMeal, "')"));
         // item.setAttribute('onclick', `displaySingleSearchDetails('${meal.idMeal}')`)
         var text = "\n    <a href=\"#".concat(Number(meal.idMeal), "\">\n    <div class=\"s-box pt-2 pb-2\">\n    ").concat(meal.strMeal, "</div>\n    </a>\n    ");
@@ -252,6 +251,8 @@ function searchMeal(e) {
                     e.preventDefault();
                     searchValue = searchInput.value;
                     searchDisplayBox.classList.remove("hidden");
+                    searchDisplayBox.classList.add("flex");
+                    searchDisplayBox.classList.add("flex-col");
                     return [4 /*yield*/, fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=".concat(searchValue), { method: "GET" })];
                 case 1:
                     response = _a.sent();

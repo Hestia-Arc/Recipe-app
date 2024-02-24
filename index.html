@@ -11,14 +11,12 @@
 </head>
 
 <body>
-    <div>
-        <nav
-            class="h-20 flex justify-between items-center bg-gray-200 px-20 mb:max-sm:px-2 sm:max-md:px-4 mb:max-sm:h-16">
-            <div
-                class="h-full bg-gray-600 text-slate-100 text-1xs text-center p-3 leading-6 mb:max-sm:text-[1rem] mb:max-sm:py-2">
+    <div class="min-w-80 max-w-[1400px] my-0 mx-auto">
+        <nav class="h-20 flex justify-between items-center bg-gray-200 px-20 mb:px-2 mb:h-16 sm:px-4 md:px-16">
+            <div class="h-full bg-gray-600 text-slate-100 text-1xs text-center p-3 leading-6 mb:text-[1rem] mb:py-2">
                 Food<br> Recipes</div>
 
-            <ul class="flex justify-between w-1/4 font-bold uppercase text-xs mb:max-sm:hidden">
+            <ul class="flex justify-end gap-4 w-1/4 font-bold uppercase text-xs mb:hidden sm:w-2/4">
                 <li class="">Basics</li>
                 <li class="">Ingredients</li>
                 <li>Nutrition</li>
@@ -30,32 +28,33 @@
         <!-- hero image -->
         <!-- ============================ -->
         <section class=" h-[500px] bg-bottom bg-no-repeat bg-cover hover:bg-center flex justify-center
-                items-center mb:max-sm:h-[420px] " style=" background-image: url('./src/images/img-2.jpg');">
+                items-center mb:h-[420px]  " style=" background-image: url('./src/images/img-2.jpg');">
 
 
-            <section class="h-[300px] flex flex-col items-center ">
+            <section class="h-[300px] flex flex-col items-center justify-center ">
                 <div class="text-center">
-                    <h2 class="font-medium text-2xl text-slate-100 mb:max-sm:text-[2rem]">Discover mouth-watering
+                    <h2 class="font-medium text-2xl text-slate-100 mb:text-[2rem] sm:text-[2.25rem]">Discover
+                        mouth-watering
                         recipes</h2>
                 </div>
 
-                <div class="h-11 relative mt-4 mb:max-sm:h-7">
+                <div class="h-11 relative mt-4 mb:h-7 ">
                     <form id="form-box" class="flex gap-1 items-center">
-                    <input type="search" id="search-input" placeholder="Find a recipe..."
-                        class="bg-slate-50 h-11 w-[19rem] border-2 border-solid border-slate-100 outline-none p-3 mb:max-sm:w-64">
-                    <!-- <a href="./src/pages/RecipeInfo.html"> -->
-                    <button type="submit" id="search-btn"
-                        class="bg-slate-500 h-11 rounded-[2px]  px-3 font-semibold text-slate-100 text-[1.2rem] border-solid border-[1.5px] border-gray-400 "><svg
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                        </svg>
-                    </button>
-                    <!-- </a> -->
+                        <input type="search" id="search-input" placeholder="Find a recipe..."
+                            class="bg-slate-50 h-11 w-[19rem] border-2 border-solid border-slate-100 outline-none p-3 mb:w-5/6 ">
+                        <!-- <a href="./src/pages/RecipeInfo.html"> -->
+                        <button type="submit" id="search-btn"
+                            class="bg-slate-500 h-11 rounded-[2px]  px-3 font-semibold text-slate-100 text-[1.2rem] border-solid border-[1.5px] border-gray-400 "><svg
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                        </button>
+                        <!-- </a> -->
                     </form>
                     <div
-                        class="search-result-box hidden absolute h-40 w-full overflow-auto top-6 flex flex-col divide-solid divide-gray-300 divide-y-[1px]  bg-gray-200 text-xs p-3 lg:top-16">
+                        class="search-result-box absolute h-40 w-full hidden overflow-auto top-12 divide-solid divide-gray-300 divide-y-[1px] bg-gray-200 text-xs p-3 ">
                     </div>
 
                 </div>
@@ -80,29 +79,31 @@
         <!-- ================= -->
         <!-- SEARCHED MEAL -->
         <!-- =============== -->
-        <section class="s-box hidden bg-grey-50 mt-20">
+        <section class="s-box hidden bg-grey-50 mt-16">
             <!-- ======================= -->
             <!-- GRID -->
             <!-- ======================= -->
-            <div class="min-h-[500px] mb-10 px-40 grid grid-cols-12 gap-10">
+            <div
+                class="min-h-[500px] mb-10 px-40 grid grid-cols-12 gap-10 mb:px-4 mb:flex mb:flex-wrap sm:px-4 sm:flex sm:gap-3 md:px-16">
 
-                <div class=" h-full col-span-8 flex flex-col gap-3 ">
-                    <h2 class="item-name capitalize text-1xs text-slate-700 font-bold">...</h2>
+                <div class=" h-full col-span-8 flex flex-col gap-3 mb:w-full sm:w-2/3 ">
+                    <h2 class="item-name capitalize text-1xs text-slate-700 font-bold mb:text-[1.2rem]">...</h2>
 
-                    <div id='item-img-box' class=" h-96  rounded-md bg-gray-400 bg-center bg-no-repeat bg-cover">
+                    <div id='item-img-box'
+                        class=" h-96  rounded-md bg-gray-400 bg-center bg-no-repeat bg-cover mb:h-56 sm:h-56">
                     </div>
 
                     <h3
-                        class="text-[1.2rem] font-bold text-slate-700 pb-1 mt-2 border-solid border-b-[1px] border-gray-300">
+                        class="text-[1.2rem] font-bold text-slate-700 pb-1 mt-2 border-solid border-b-[1px] border-gray-300 mb:text-[0.9rem]">
                         Method</h3>
 
-                        <div class="item-method text-xss"></div>
+                    <div class="item-method text-xss mb:text-xs"></div>
                 </div>
 
                 <!-- ======================= -->
                 <!-- SIDE -->
                 <!-- ======================= -->
-                <div class=" h-full col-span-4 ">
+                <div class=" h-full col-span-4 sm:w-[34%] ">
                     <!-- VIDEO -->
                     <div class="h-[200px] mt-12 rounded border-solid border-[1px] border-slate-200">
                         <iframe src="" class="item-video h-full w-full rounded"></iframe>
@@ -125,30 +126,31 @@
         <!-- ================= -->
         <!-- RANDOM MEAL -->
         <!-- =============== -->
-        <section class=" random-box px-20 mt-20 mb:max-sm:px-4 mb:max-sm:mt-16 ">
-            <h3 class="text-1xs border-solid border-b-2">Popular from other blogs</h3>
+        <section class="random-box px-20 mt-16 mb:px-4 mb:mt-16 sm:px-4 md:px-16">
+            <h3 class="text-1xs border-solid border-b-[1px]">Popular from other blogs</h3>
 
-            <div class="flex gap-4 mt-4 mb:max-sm:flex-wrap">
+            <div class="flex gap-4 mt-4 mb:flex-wrap">
 
                 <!--==========FROM BLOGS -->
-                <div class="min-h-96 w-[75%] mb:max-sm:w-full">
+                <div class="min-h-96 w-[75%] mb:w-full sm:w-[65%]">
 
-                    <div class="min-h-80 flex gap-4 mb:max-sm:flex-wrap">
+                    <div class="min-h-80  flex gap-4 mb:flex-wrap sm:flex-wrap">
                         <div id='meal-img-box'
-                            class=" h-80 w-[410px] rounded-md bg-slate-400 bg-center bg-no-repeat bg-cover mb:max-sm:h-56">
+                            class=" h-80 w-[410px] rounded-md bg-slate-400 bg-center bg-no-repeat bg-cover mb:h-56 mb:w-full sm:h-64 sm:w-full md:w-[400px]">
                         </div>
 
                         <div class="flex flex-col gap-4">
-                            <div class="w-[400px] pt-2 mb:max-sm:w-full">
+                            <div class="w-[400px] pt-2 mb:w-full sm:w-full md:w-[300px]">
                                 <div
-                                    class=" meal-category w-[90px] p-1 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200">
+                                    class=" meal-category w-fit py-1 px-3 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200">
                                     vegan
                                 </div>
 
-                                <h3 class="meal-name text-1xs font-semibold uppercase mb:max-sm:text-[1.2rem]">Delicious
+                                <h3 class="meal-name text-1xs font-semibold uppercase mb:text-[1.2rem]">Delicious
                                     creamy smoothie</h3>
 
-                                <p class="meal-guide text-gray-400 text-xss mb:max-sm:text-[0.8rem]">Then we are layering the puff
+                                <p class="meal-guide text-gray-400 text-xss mb:text-[0.8rem]">Then we are layering the
+                                    puff
                                     pastry with a quick schmear
                                     of
                                     creamy
@@ -164,8 +166,9 @@
 
                     <!-- =================MORE FROM BLOGS (TAGS) -->
 
-                    <div class="min-h-80 mt-16 pr-3 flex gap-8 mb:max-sm:flex-wrap mb:max-sm:pr-0">
-                        <div class="h-80 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 mb:max-sm:h-72"
+                    <div
+                        class="min-h-80 mt-16 pt-3 pr-3 flex gap-8 border-solid border-t-[1px]  mb:flex-wrap mb:pr-0 sm:flex-wrap sm:pr-0 sm:gap-4">
+                        <div class="h-80 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 mb:h-72 sm:h-52 "
                             style="background-image: url('./src/images/img-1.jpg')">
 
 
@@ -180,7 +183,7 @@
                             </div>
                         </div>
 
-                        <div class="h-80 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 mb:max-sm:h-72"
+                        <div class="h-80 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 mb:h-72 sm:h-52 "
                             style="background-image: url('./src/images/img-1.jpg')">
 
 
@@ -198,9 +201,9 @@
                 </div>
 
                 <!-- --==========-CATEGORIES -->
-                <div class="w-[26%] bg-gray-100 mb:max-sm:w-full mb:max-sm:mt-6">
+                <div class="w-[26%] mb:w-full mb:mt-6 sm:w-[35%]">
                     <h3
-                        class="text-[1.2rem] text-slate-100 text-center font-bold bg-gray-600 p-3 capitalize mb:max-sm:text-xss ">
+                        class="text-[1.2rem] text-slate-100 text-center font-bold bg-gray-600 p-3 capitalize mb:text-xss ">
                         categories</h3>
 
                     <div class="flex flex-col gap-1 mt-1 category-box">
@@ -217,12 +220,12 @@
 
                 </div>
             </div>
-    </div>
-    </section>
+
+        </section>
 
 
 
-    <!-- <section class="mt-24 mb-24 pt-3 bg-slate-500">
+        <!-- <section class="mt-24 mb-24 pt-3 bg-slate-500">
             <div class="text-center mt-4 mb-2">
                 <p class="font-bold text-xs uppercase text-slate-200 ">categories</p>
                 <h2 class="text-1xs text-slate-100">Discover more</h2> 
@@ -233,13 +236,13 @@
 
 
 
-    <!-- ======================= -->
-    <!-- FOOTER -->
-    <!-- ======================== -->
-    <!-- <section class="h-96 mt-8 border-solid border-orange-400 border-2">welcome to the Recipe app</section> -->
-    <section class="h-[50px] mt-8 mb-4 px-20 mb:max-sm:px-4">
-        <p class="p-4 border-solid border-y text-xs">Built by Hestia 2024</p>
-    </section>
+        <!-- ======================= -->
+        <!-- FOOTER -->
+        <!-- ======================== -->
+        <!-- <section class="h-96 mt-8 border-solid border-orange-400 border-2">welcome to the Recipe app</section> -->
+        <section class="h-[50px] mt-8 mb-4 px-20 mb:px-4 sm:px-4 md:px-16">
+            <p class="p-4 border-solid border-y text-xs">Built by Hestia 2024</p>
+        </section>
 
 
     </div>
