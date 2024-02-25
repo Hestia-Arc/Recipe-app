@@ -39,6 +39,8 @@ var boxImg = document.querySelector(".img-box");
 var randomBox = document.querySelector(".random-box");
 var mealImage = document.querySelector("#meal-img-box");
 var cateBox = document.querySelector(".category-box");
+var categoryListBox = document.querySelector(".s-category-box");
+var categoryName = document.querySelector("s-category-name");
 var moreDisplay = document.querySelector(".recipe-display-box");
 var mealCategory = document.querySelector(".meal-category");
 var mealName = document.querySelector(".meal-name");
@@ -63,7 +65,7 @@ function displayRecipe(info) {
     if (!data.strInstructions || !data.strInstructions) {
         return;
     }
-    var guide = (_a = data.strInstructions) === null || _a === void 0 ? void 0 : _a.slice(0, 300).replace(/\./g, '. <br>-');
+    var guide = (_a = data.strInstructions) === null || _a === void 0 ? void 0 : _a.slice(0, 300).replace(/\./g, ". <br>-");
     mealImage.style.backgroundImage = "url(".concat(data === null || data === void 0 ? void 0 : data.strMealThumb, ")");
     mealCategory.textContent = data.strCategory;
     mealName.textContent = data.strMeal;
@@ -88,6 +90,43 @@ function getRecipes() {
         });
     });
 }
+// -----------------------GET SINGLE CATEGORY
+function getSingleCategory(category) {
+    var _a;
+    return __awaiter(this, void 0, void 0, function () {
+        var response, data, err_1;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    randomBox.classList.add("hidden");
+                    categoryListBox.classList.remove("hidden");
+                    categoryListBox.classList.add("flex");
+                    _b.label = 1;
+                case 1:
+                    _b.trys.push([1, 4, , 5]);
+                    return [4 /*yield*/, fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c=".concat(category), { method: "GET" })];
+                case 2:
+                    response = _b.sent();
+                    return [4 /*yield*/, response.json()];
+                case 3:
+                    data = _b.sent();
+                    console.log(data);
+                    (_a = data.meals) === null || _a === void 0 ? void 0 : _a.forEach(function (meal) {
+                        var mealLink = document.createElement("a");
+                        var html = "\n        <div\n        class=\"h-60 w-48 bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 hover:cursor-pointer mb:h-72 sm:h-52\"\n        style=\"background-image: url('".concat(meal.strMealThumb, "')\"\n        >\n            <div\n              class=\"w-[85%] p-[2px]  rounded-xl bg-gray-100 text-center text-xs capitalize font-[400] text-gray-900\n               \"\n            >\n              ").concat(meal.strMeal, "\n            </div>\n        </div>\n\n      ");
+                        mealLink.innerHTML = html;
+                        categoryListBox.appendChild(mealLink);
+                    });
+                    return [2 /*return*/, data];
+                case 4:
+                    err_1 = _b.sent();
+                    console.log(err_1.message);
+                    return [3 /*break*/, 5];
+                case 5: return [2 /*return*/];
+            }
+        });
+    });
+}
 function displayCategory(data) {
     // boxImg.setAttribute("src", info?.strMealThumb);
     //   console.log(data);
@@ -95,19 +134,14 @@ function displayCategory(data) {
     if (!data.categories || !data.categories.length) {
         return;
     }
-    var dataSpliced = (_a = data.categories) === null || _a === void 0 ? void 0 : _a.slice(5, 15);
+    var dataSpliced = (_a = data.categories) === null || _a === void 0 ? void 0 : _a.slice(0, 14);
     dataSpliced.forEach(function (item) {
-        // const html = `
-        // <div class=" h-64 w-[11rem] flex flex-col justify-end items-center pb-4  rounded-md bg-center bg-no-repeat bg-cover bg-slate-100 "
-        //     style="background-image: url('${item.strCategoryThumb}');">
-        //     <div class="w-[100px] p-1 rounded-2xl bg-gray-300 text-center text-xs uppercase font-bold">
-        //         ${item.strCategory}
-        //     </div>
-        // </div>
-        // `;
-        var categoryHtml = "\n    <div class=\"h-[4rem] w-full bg-gray-200 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-center items-end pr-3 \"\n    style=\"background-image: url('".concat(item.strCategoryThumb, "')\">\n\n    <div\n        class=\"w-[fit] py-[1.5px] px-3 rounded-xl bg-gray-100 text-center text-[0.65rem] uppercase font-[400] text-gray-900 \">\n        ").concat(item.strCategory, "\n    </div>\n</div>\n\n    ");
-        // cateBox.innerHTML = html
-        cateBox.insertAdjacentHTML("afterbegin", categoryHtml);
+        var categoryItem = document.createElement("a");
+        categoryItem.setAttribute("onclick", "getSingleCategory('".concat(item.strCategory, "')"));
+        var categoryHtml = "\n    <div class=\"h-[4rem] w-full bg-gray-200 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-center items-end pr-3 hover:cursor-pointer\"\n        style=\"background-image: url('".concat(item.strCategoryThumb, "')\">\n\n        <div\n            class=\"w-[fit] py-[1.5px] px-3 rounded-xl bg-gray-100 text-center text-[0.65rem] uppercase font-[400] text-gray-900 \">\n            ").concat(item.strCategory, "\n        </div>\n    </div>\n\n    ");
+        categoryItem.innerHTML = categoryHtml;
+        cateBox.appendChild(categoryItem);
+        // cateBox.insertAdjacentHTML("afterbegin", categoryHtml);
     });
 }
 // --------------------------------------
@@ -123,14 +157,14 @@ function getCategories() {
                 case 2:
                     data = _a.sent();
                     displayCategory(data);
+                    // console.log(data)
                     return [2 /*return*/, data];
             }
         });
     });
 }
-// -------------------------------------
 // =============================
-// GET MEAL BY NAME
+// GET RANDOM MEAL
 // ============================
 function getMeal() {
     return __awaiter(this, void 0, void 0, function () {
@@ -150,43 +184,18 @@ function getMeal() {
         });
     });
 }
-// ==========================
-// =============================
-function getMealByCategory() {
-    return __awaiter(this, void 0, void 0, function () {
-        var response, response2, data, data2;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood", { method: "GET" })];
-                case 1:
-                    response = _a.sent();
-                    return [4 /*yield*/, fetch("https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772", { method: "GET" })];
-                case 2:
-                    response2 = _a.sent();
-                    return [4 /*yield*/, response.json()];
-                case 3:
-                    data = _a.sent();
-                    return [4 /*yield*/, response2.json()];
-                case 4:
-                    data2 = _a.sent();
-                    // displayRecipe(data);
-                    // console.log(data)
-                    // console.log(data2)
-                    return [2 /*return*/, data];
-            }
-        });
-    });
-}
 // --------------------------------
 function displaySingleSearchDetails(id) {
     var _a, _b;
     return __awaiter(this, void 0, void 0, function () {
-        var response, dataResponse, data, slicedLink, guideWithNewLines, items, err_1;
+        var response, dataResponse, data, slicedLink, guideWithNewLines, items, err_2;
         return __generator(this, function (_c) {
             switch (_c.label) {
                 case 0:
+                    +(
                     // console.log(id);
-                    randomBox.classList.add("hidden");
+                    randomBox.classList.add("hidden"));
+                    categoryListBox.classList.add("hidden");
                     sBox.classList.remove("hidden");
                     sBox.setAttribute("id", id);
                     _c.label = 1;
@@ -205,7 +214,7 @@ function displaySingleSearchDetails(id) {
                         itemVideo.setAttribute("src", "");
                     }
                     slicedLink = (_a = data.strYoutube) === null || _a === void 0 ? void 0 : _a.slice(32, 43);
-                    guideWithNewLines = (_b = data.strInstructions) === null || _b === void 0 ? void 0 : _b.replace(/\./g, '. <br>-');
+                    guideWithNewLines = (_b = data.strInstructions) === null || _b === void 0 ? void 0 : _b.replace(/\./g, ". <br>-");
                     items = "\n  <ul class=\"flex flex-col gap-3\">\n    <li> ".concat(data.strMeasure1, " ").concat(data.strIngredient1, " </li>\n    <li> ").concat(data.strMeasure2, " ").concat(data.strIngredient2, " </li>\n    <li> ").concat(data.strMeasure3, " ").concat(data.strIngredient3, " </li>\n    <li> ").concat(data.strMeasure4, " ").concat(data.strIngredient4, " </li>\n    <li> ").concat(data.strMeasure5, " ").concat(data.strIngredient5, " </li>\n    <li> ").concat(data.strMeasure6, " ").concat(data.strIngredient6, " </li>\n    <li> ").concat(data.strMeasure7, " ").concat(data.strIngredient7, " </li>\n    <li> ").concat(data.strMeasure8, " ").concat(data.strIngredient8, " </li>\n    <li> ").concat(data.strMeasure9, " ").concat(data === null || data === void 0 ? void 0 : data.strIngredient9, " </li>\n    <li> ").concat(data.strMeasure10, " ").concat(data.strIngredient10, " </li>\n    <li> ").concat(data.strMeasure11, " ").concat(data.strIngredient11, " </li>\n    <li> ").concat(data.strMeasure12, " ").concat(data.strIngredient12, " </li>\n    <li> ").concat(data.strMeasure13, " ").concat(data.strIngredient13, " </li> \n    <li> ").concat(data.strMeasure14, " ").concat(data.strIngredient14, " </li>\n    <li> ").concat(data.strMeasure15, " ").concat(data.strIngredient15, " </li>\n     <li> ").concat(data === null || data === void 0 ? void 0 : data.strMeasure16, " ").concat(data.strIngredient16, " </li>\n    <li> ").concat(data === null || data === void 0 ? void 0 : data.strMeasure17, " ").concat(data.strIngredient17, " </li>\n     <li> ").concat(data === null || data === void 0 ? void 0 : data.strMeasure18, " ").concat(data.strIngredient18, " </li>\n    <li> ").concat(data === null || data === void 0 ? void 0 : data.strMeasure19, " ").concat(data.strIngredient19, " </li> \n    <li> ").concat(data === null || data === void 0 ? void 0 : data.strMeasure20, " ").concat(data.strIngredient20, " </li>\n\n  </ul>\n  ");
                     itemName.textContent = data.strMeal;
                     detailImage.style.backgroundImage = "url(".concat(data === null || data === void 0 ? void 0 : data.strMealThumb, ")");
@@ -216,8 +225,8 @@ function displaySingleSearchDetails(id) {
                     // console.log(slicedLink);
                     return [2 /*return*/, data];
                 case 4:
-                    err_1 = _c.sent();
-                    console.log(err_1.message);
+                    err_2 = _c.sent();
+                    console.log(err_2.message);
                     return [3 /*break*/, 5];
                 case 5: return [2 /*return*/];
             }
@@ -231,7 +240,6 @@ function displayResult(data) {
     }
     (_a = data.meals) === null || _a === void 0 ? void 0 : _a.forEach(function (meal) {
         var item = document.createElement("a");
-        item.setAttribute("href", "./src/pages/RecipeInfo.html");
         item.setAttribute("onclick", "displaySingleSearchDetails('".concat(meal.idMeal, "')"));
         // item.setAttribute('onclick', `displaySingleSearchDetails('${meal.idMeal}')`)
         var text = "\n    <a href=\"#".concat(Number(meal.idMeal), "\">\n    <div class=\"s-box pt-2 pb-2\">\n    ").concat(meal.strMeal, "</div>\n    </a>\n    ");
@@ -267,19 +275,7 @@ function searchMeal(e) {
     });
 }
 // -------------------------
-//   getMealByCategory();
 // getRecipes();
 getCategories();
 getMeal();
 formBox.addEventListener("submit", searchMeal);
-// searchBtn.addEventListener("click", searchMeal);
-// -------------------------------------------------------------------
-// let text = `
-// <a href="./src/pages/RecipeInfo.html">
-// <div data-id="${meal.idMeal}" class="s-box pt-2 pb-2 "
-//  onclick="() => ${displaySingleSearchDetails}">
-// ${meal.strMeal}</div>
-// </a>
-// `;
-// const text = `<a href="./src/pages/RecipeInfo.html"><div class="pt-2 pb-2 ">${meal.strMeal}</div></a>`
-// searchDisplayBox.insertAdjacentHTML("afterbegin", text);

@@ -715,6 +715,14 @@ video {
   height: 100%;
 }
 
+.h-56 {
+  height: 14rem;
+}
+
+.h-60 {
+  height: 15rem;
+}
+
 .min-h-80 {
   min-height: 20rem;
 }
@@ -792,16 +800,12 @@ video {
   width: 100%;
 }
 
+.w-48 {
+  width: 12rem;
+}
+
 .min-w-80 {
   min-width: 20rem;
-}
-
-.max-w-7xl {
-  max-width: 80rem;
-}
-
-.max-w-\[1300px\] {
-  max-width: 1300px;
 }
 
 .max-w-\[1400px\] {
@@ -858,6 +862,10 @@ video {
 
 .gap-8 {
   gap: 2rem;
+}
+
+.gap-5 {
+  gap: 1.25rem;
 }
 
 .divide-y-\[1px\] > :not([hidden]) ~ :not([hidden]) {
@@ -1052,6 +1060,14 @@ video {
   padding: 1rem;
 }
 
+.p-\[1\.5px\] {
+  padding: 1.5px;
+}
+
+.p-\[2px\] {
+  padding: 2px;
+}
+
 .px-20 {
   padding-left: 5rem;
   padding-right: 5rem;
@@ -1214,6 +1230,10 @@ video {
 .outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.hover\:cursor-pointer:hover {
+  cursor: pointer;
 }
 
 .hover\:bg-center:hover {
@@ -1394,24 +1414,8 @@ video {
 }
 
 @media (min-width: 1024px) and (max-width: 1299px) {
-  .md\:w-2\/4 {
-    width: 50%;
-  }
-
-  .md\:w-\[360px\] {
-    width: 360px;
-  }
-
-  .md\:w-\[430px\] {
-    width: 430px;
-  }
-
   .md\:w-\[300px\] {
     width: 300px;
-  }
-
-  .md\:w-\[420px\] {
-    width: 420px;
   }
 
   .md\:w-\[400px\] {

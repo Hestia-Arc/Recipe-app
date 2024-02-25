@@ -3,6 +3,11 @@ const boxImg = document.querySelector(".img-box");
 const randomBox = document.querySelector(".random-box") as HTMLElement;
 const mealImage = document.querySelector("#meal-img-box") as HTMLElement;
 const cateBox = document.querySelector(".category-box") as HTMLElement;
+const categoryListBox = document.querySelector(
+  ".s-category-box"
+) as HTMLElement;
+const categoryName = document.querySelector("s-category-name") as HTMLElement;
+
 const moreDisplay = document.querySelector(".recipe-display-box");
 
 const mealCategory = document.querySelector(".meal-category") as HTMLElement;
@@ -15,7 +20,6 @@ const searchDisplayBox = document.querySelector(
   ".search-result-box"
 ) as HTMLElement;
 const formBox = document.querySelector("#form-box") as HTMLElement;
-
 
 const sBox = document.querySelector(".s-box") as HTMLElement;
 const itemName = document.querySelector(".item-name") as HTMLElement;
@@ -103,7 +107,7 @@ function displayRecipe(info: RecipeBox) {
     return;
   }
 
-  let guide = data.strInstructions?.slice(0, 300).replace(/\./g, '. <br>-');
+  let guide = data.strInstructions?.slice(0, 300).replace(/\./g, ". <br>-");
 
   mealImage.style.backgroundImage = `url(${data?.strMealThumb})`;
   mealCategory.textContent = data.strCategory;
@@ -132,11 +136,68 @@ interface CategoryList {
   categories: Category[];
 }
 
+interface SingleCategoryList {
+  meals: SingleCategory[];
+}
+
+interface SingleCategory {
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+}
+
 interface Category {
   idCategory: string;
   strCategory: string;
   strCategoryDescription: string;
   strCategoryThumb: string;
+}
+
+// -----------------------GET SINGLE CATEGORY
+async function getSingleCategory(category: string) {
+  randomBox.classList.add("hidden");
+  categoryListBox.classList.remove("hidden");
+  categoryListBox.classList.add("flex");
+
+
+  // sBox.setAttribute("id", id);
+
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`,
+      { method: "GET" }
+    );
+
+    const data: SingleCategoryList = await response.json();
+
+    console.log(data);
+
+    data.meals?.forEach((meal) => {
+      let mealLink = document.createElement("a");
+      let html = `
+        <div
+        class="h-60 w-48 bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 hover:cursor-pointer mb:h-72 sm:h-52"
+        style="background-image: url('${meal.strMealThumb}')"
+        >
+            <div
+              class="w-[85%] p-[2px]  rounded-xl bg-gray-100 text-center text-xs capitalize font-[400] text-gray-900
+               "
+            >
+              ${meal.strMeal}
+            </div>
+        </div>
+
+      `;
+
+      mealLink.innerHTML = html;
+      categoryListBox.appendChild(mealLink);
+
+    });
+
+    return data;
+  } catch (err) {
+    console.log(err.message);
+  }
 }
 
 function displayCategory(data: CategoryList) {
@@ -147,34 +208,30 @@ function displayCategory(data: CategoryList) {
     return;
   }
 
-  let dataSpliced = data.categories?.slice(5, 15);
+  let dataSpliced = data.categories?.slice(0, 14);
 
   dataSpliced.forEach((item) => {
-    // const html = `
-
-    // <div class=" h-64 w-[11rem] flex flex-col justify-end items-center pb-4  rounded-md bg-center bg-no-repeat bg-cover bg-slate-100 "
-    //     style="background-image: url('${item.strCategoryThumb}');">
-    //     <div class="w-[100px] p-1 rounded-2xl bg-gray-300 text-center text-xs uppercase font-bold">
-    //         ${item.strCategory}
-    //     </div>
-    // </div>
-
-    // `;
+    let categoryItem = document.createElement("a");
+    categoryItem.setAttribute(
+      "onclick",
+      `getSingleCategory('${item.strCategory}')`
+    );
 
     const categoryHtml = `
-    <div class="h-[4rem] w-full bg-gray-200 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-center items-end pr-3 "
-    style="background-image: url('${item.strCategoryThumb}')">
+    <div class="h-[4rem] w-full bg-gray-200 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-center items-end pr-3 hover:cursor-pointer"
+        style="background-image: url('${item.strCategoryThumb}')">
 
-    <div
-        class="w-[fit] py-[1.5px] px-3 rounded-xl bg-gray-100 text-center text-[0.65rem] uppercase font-[400] text-gray-900 ">
-        ${item.strCategory}
+        <div
+            class="w-[fit] py-[1.5px] px-3 rounded-xl bg-gray-100 text-center text-[0.65rem] uppercase font-[400] text-gray-900 ">
+            ${item.strCategory}
+        </div>
     </div>
-</div>
 
     `;
 
-    // cateBox.innerHTML = html
-    cateBox.insertAdjacentHTML("afterbegin", categoryHtml);
+    categoryItem.innerHTML = categoryHtml;
+    cateBox.appendChild(categoryItem);
+    // cateBox.insertAdjacentHTML("afterbegin", categoryHtml);
   });
 }
 
@@ -188,12 +245,12 @@ async function getCategories() {
   const data = await response.json();
 
   displayCategory(data);
+  // console.log(data)
   return data;
 }
-// -------------------------------------
 
 // =============================
-// GET MEAL BY NAME
+// GET RANDOM MEAL
 // ============================
 async function getMeal() {
   const response = await fetch(
@@ -208,34 +265,13 @@ async function getMeal() {
   return data;
 }
 
-// ==========================
-
-// =============================
-async function getMealByCategory() {
-  const response = await fetch(
-    "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood",
-    { method: "GET" }
-  );
-
-  const response2 = await fetch(
-    "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772",
-    { method: "GET" }
-  );
-
-  const data = await response.json();
-  const data2 = await response2.json();
-
-  // displayRecipe(data);
-  // console.log(data)
-  // console.log(data2)
-
-  return data;
-}
-
 // --------------------------------
 async function displaySingleSearchDetails(id: string) {
-  // console.log(id);
-  randomBox.classList.add("hidden");
+  +(
+    // console.log(id);
+    randomBox.classList.add("hidden")
+  );
+  categoryListBox.classList.add("hidden");
   sBox.classList.remove("hidden");
   sBox.setAttribute("id", id);
 
@@ -247,17 +283,13 @@ async function displaySingleSearchDetails(id: string) {
 
     const dataResponse: RecipeBox = await response.json();
 
-    let data = dataResponse?.meals[0]
+    let data = dataResponse?.meals[0];
     // console.log(data);
-
 
     if (!data.strYoutube || !data.strYoutube.length) {
       // return;
-   
-      itemVideo.setAttribute(
-        "src",
-        ""
-      );
+
+      itemVideo.setAttribute("src", "");
     }
 
     // if (!data.strInstructions || !data.strInstructions.length) {
@@ -265,7 +297,7 @@ async function displaySingleSearchDetails(id: string) {
     // }
 
     let slicedLink = data.strYoutube?.slice(32, 43);
-    let guideWithNewLines = data.strInstructions?.replace(/\./g, '. <br>-')
+    let guideWithNewLines = data.strInstructions?.replace(/\./g, ". <br>-");
     let items = `
   <ul class="flex flex-col gap-3">
     <li> ${data.strMeasure1} ${data.strIngredient1} </li>
@@ -316,7 +348,6 @@ function displayResult(data: ResultBox) {
 
   data.meals?.forEach((meal) => {
     let item = document.createElement("a");
-    item.setAttribute("href", "./src/pages/RecipeInfo.html");
     item.setAttribute(
       "onclick",
       `displaySingleSearchDetails('${meal.idMeal}')`
@@ -357,12 +388,11 @@ function displayResult(data: ResultBox) {
 
 // -----------------------SEARCH MEAL
 async function searchMeal(e) {
-  e.preventDefault()
+  e.preventDefault();
   let searchValue = searchInput.value;
   searchDisplayBox.classList.remove("hidden");
-  searchDisplayBox.classList.add("flex")
-  searchDisplayBox.classList.add("flex-col")
-
+  searchDisplayBox.classList.add("flex");
+  searchDisplayBox.classList.add("flex-col");
 
   const response = await fetch(
     `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`,
@@ -377,23 +407,7 @@ async function searchMeal(e) {
 }
 
 // -------------------------
-//   getMealByCategory();
 // getRecipes();
 getCategories();
 getMeal();
 formBox.addEventListener("submit", searchMeal);
-
-// searchBtn.addEventListener("click", searchMeal);
-
-// -------------------------------------------------------------------
-// let text = `
-// <a href="./src/pages/RecipeInfo.html">
-// <div data-id="${meal.idMeal}" class="s-box pt-2 pb-2 "
-//  onclick="() => ${displaySingleSearchDetails}">
-// ${meal.strMeal}</div>
-// </a>
-// `;
-
-// const text = `<a href="./src/pages/RecipeInfo.html"><div class="pt-2 pb-2 ">${meal.strMeal}</div></a>`
-
-// searchDisplayBox.insertAdjacentHTML("afterbegin", text);

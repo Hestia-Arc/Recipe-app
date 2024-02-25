@@ -1,69 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recipe app</title>
     <link rel="stylesheet" href="./src/css/output.css" />
+  </head>
 
-
-</head>
-
-<body>
+  <body>
     <div class="min-w-80 max-w-[1400px] my-0 mx-auto">
-        <nav class="h-20 flex justify-between items-center bg-gray-200 px-20 mb:px-2 mb:h-16 sm:px-4 md:px-16">
-            <div class="h-full bg-gray-600 text-slate-100 text-1xs text-center p-3 leading-6 mb:text-[1rem] mb:py-2">
-                Food<br> Recipes</div>
+      <nav
+        class="h-20 flex justify-between items-center bg-gray-200 px-20 mb:px-2 mb:h-16 sm:px-4 md:px-16"
+      >
+        <div
+          class="h-full bg-gray-600 text-slate-100 text-1xs text-center p-3 leading-6 mb:text-[1rem] mb:py-2"
+        >
+          Food<br />
+          Recipes
+        </div>
 
-            <ul class="flex justify-end gap-4 w-1/4 font-bold uppercase text-xs mb:hidden sm:w-2/4">
-                <li class="">Basics</li>
-                <li class="">Ingredients</li>
-                <li>Nutrition</li>
-            </ul>
-        </nav>
+        <ul
+          class="flex justify-end gap-4 w-1/4 font-bold uppercase text-xs mb:hidden sm:w-2/4"
+        >
+          <li class="">Basics</li>
+          <li class="">Ingredients</li>
+          <li>Nutrition</li>
+        </ul>
+      </nav>
 
+      <!-- ============================ -->
+      <!-- hero image -->
+      <!-- ============================ -->
+      <section
+        class="h-[500px] bg-bottom bg-no-repeat bg-cover hover:bg-center flex justify-center items-center mb:h-[420px]"
+        style="background-image: url('./src/images/img-2.jpg')"
+      >
+        <section class="h-[300px] flex flex-col items-center justify-center">
+          <div class="text-center">
+            <h2
+              class="font-medium text-2xl text-slate-100 mb:text-[2rem] sm:text-[2.25rem]"
+            >
+              Discover mouth-watering recipes
+            </h2>
+          </div>
 
-        <!-- ============================ -->
-        <!-- hero image -->
-        <!-- ============================ -->
-        <section class=" h-[500px] bg-bottom bg-no-repeat bg-cover hover:bg-center flex justify-center
-                items-center mb:h-[420px]  " style=" background-image: url('./src/images/img-2.jpg');">
+          <div class="h-11 relative mt-4 mb:h-7">
+            <form id="form-box" class="flex gap-1 items-center">
+              <input
+                type="search"
+                id="search-input"
+                placeholder="Find a recipe..."
+                class="bg-slate-50 h-11 w-[19rem] border-2 border-solid border-slate-100 outline-none p-3 mb:w-5/6"
+              />
+              <!-- <a href="./src/pages/RecipeInfo.html"> -->
+              <button
+                type="submit"
+                id="search-btn"
+                class="bg-slate-500 h-11 rounded-[2px] px-3 font-semibold text-slate-100 text-[1.2rem] border-solid border-[1.5px] border-gray-400"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                  />
+                </svg>
+              </button>
+              <!-- </a> -->
+            </form>
+            <div
+              class="search-result-box absolute h-40 w-full hidden overflow-auto top-12 divide-solid divide-gray-300 divide-y-[1px] bg-gray-200 text-xs p-3"
+            ></div>
+          </div>
 
+          <div class="text-xss text-slate-100 text-center mt-3">
+            <p class="">The recipes to happiness</p>
+            <p class="">Want to discover new dishes from different cultures?</p>
 
-            <section class="h-[300px] flex flex-col items-center justify-center ">
-                <div class="text-center">
-                    <h2 class="font-medium text-2xl text-slate-100 mb:text-[2rem] sm:text-[2.25rem]">Discover
-                        mouth-watering
-                        recipes</h2>
-                </div>
-
-                <div class="h-11 relative mt-4 mb:h-7 ">
-                    <form id="form-box" class="flex gap-1 items-center">
-                        <input type="search" id="search-input" placeholder="Find a recipe..."
-                            class="bg-slate-50 h-11 w-[19rem] border-2 border-solid border-slate-100 outline-none p-3 mb:w-5/6 ">
-                        <!-- <a href="./src/pages/RecipeInfo.html"> -->
-                        <button type="submit" id="search-btn"
-                            class="bg-slate-500 h-11 rounded-[2px]  px-3 font-semibold text-slate-100 text-[1.2rem] border-solid border-[1.5px] border-gray-400 "><svg
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                                stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                            </svg>
-                        </button>
-                        <!-- </a> -->
-                    </form>
-                    <div
-                        class="search-result-box absolute h-40 w-full hidden overflow-auto top-12 divide-solid divide-gray-300 divide-y-[1px] bg-gray-200 text-xs p-3 ">
-                    </div>
-
-                </div>
-
-                <div class="text-xss text-slate-100 text-center mt-3">
-                    <p class="">The recipes to happiness</p>
-                    <p class="">Want to discover new dishes from different cultures?</p>
-
-                    <!-- <div class="flex items-center gap-4 flex-wrap mt-3">
+            <!-- <div class="flex items-center gap-4 flex-wrap mt-3">
                         <span class="bg-slate-800 h[50px] w-[100px] p-2 text-center text-slate-100">dessert</span>
                         <a href="./src/pages/RecipeInfo.html"> <span
                                 class="bg-slate-800 h[50px] w-[100px] p-2 text-center text-slate-100">pasta</span></a>
@@ -71,161 +92,206 @@
                         <span class="bg-slate-800 h[50px] w-[100px] p-2 text-center text-slate-100">vegan</span>
 
                     </div> -->
-                </div>
-            </section>
+          </div>
         </section>
+      </section>
 
+      <!-- ================= -->
+      <!-- SEARCHED MEAL -->
+      <!-- =============== -->
+      <section class="s-box hidden bg-grey-50 mt-16">
+        <!-- ======================= -->
+        <!-- GRID -->
+        <!-- ======================= -->
+        <div
+          class="min-h-[500px] mb-10 px-40 grid grid-cols-12 gap-10 mb:px-4 mb:flex mb:flex-wrap sm:px-4 sm:flex sm:gap-3 md:px-16"
+        >
+          <div class="h-full col-span-8 flex flex-col gap-3 mb:w-full sm:w-2/3">
+            <h2
+              class="item-name capitalize text-1xs text-slate-700 font-bold mb:text-[1.2rem]"
+            >
+              ...
+            </h2>
 
-        <!-- ================= -->
-        <!-- SEARCHED MEAL -->
-        <!-- =============== -->
-        <section class="s-box hidden bg-grey-50 mt-16">
-            <!-- ======================= -->
-            <!-- GRID -->
-            <!-- ======================= -->
             <div
-                class="min-h-[500px] mb-10 px-40 grid grid-cols-12 gap-10 mb:px-4 mb:flex mb:flex-wrap sm:px-4 sm:flex sm:gap-3 md:px-16">
+              id="item-img-box"
+              class="h-96 rounded-md bg-gray-400 bg-center bg-no-repeat bg-cover mb:h-56 sm:h-56"
+            ></div>
 
-                <div class=" h-full col-span-8 flex flex-col gap-3 mb:w-full sm:w-2/3 ">
-                    <h2 class="item-name capitalize text-1xs text-slate-700 font-bold mb:text-[1.2rem]">...</h2>
+            <h3
+              class="text-[1.2rem] font-bold text-slate-700 pb-1 mt-2 border-solid border-b-[1px] border-gray-300 mb:text-[0.9rem]"
+            >
+              Method
+            </h3>
 
-                    <div id='item-img-box'
-                        class=" h-96  rounded-md bg-gray-400 bg-center bg-no-repeat bg-cover mb:h-56 sm:h-56">
-                    </div>
+            <div class="item-method text-xss mb:text-xs"></div>
+          </div>
 
-                    <h3
-                        class="text-[1.2rem] font-bold text-slate-700 pb-1 mt-2 border-solid border-b-[1px] border-gray-300 mb:text-[0.9rem]">
-                        Method</h3>
-
-                    <div class="item-method text-xss mb:text-xs"></div>
-                </div>
-
-                <!-- ======================= -->
-                <!-- SIDE -->
-                <!-- ======================= -->
-                <div class=" h-full col-span-4 sm:w-[34%] ">
-                    <!-- VIDEO -->
-                    <div class="h-[200px] mt-12 rounded border-solid border-[1px] border-slate-200">
-                        <iframe src="" class="item-video h-full w-full rounded"></iframe>
-                    </div>
-
-
-                    <!-- INGREDIENTS -->
-                    <div class="min-h-[400px] mt-4 bg-gray-200">
-                        <h2 class="px-3 py-3 capitalize bg-gray-600 text-[1.2rem] text-slate-100 font-bold">Ingredients
-                        </h2>
-
-                        <div class="item-ingredient px-3 mt-3 mb-3 text-xss"></div>
-                    </div>
-                </div>
-
+          <!-- ======================= -->
+          <!-- SIDE -->
+          <!-- ======================= -->
+          <div class="h-full col-span-4 sm:w-[34%]">
+            <!-- VIDEO -->
+            <div
+              class="h-[200px] mt-12 rounded border-solid border-[1px] border-slate-200"
+            >
+              <iframe src="" class="item-video h-full w-full rounded"></iframe>
             </div>
-        </section>
 
+            <!-- INGREDIENTS -->
+            <div class="min-h-[400px] mt-4 bg-gray-200">
+              <h2
+                class="px-3 py-3 capitalize bg-gray-600 text-[1.2rem] text-slate-100 font-bold"
+              >
+                Ingredients
+              </h2>
 
-        <!-- ================= -->
-        <!-- RANDOM MEAL -->
-        <!-- =============== -->
-        <section class="random-box px-20 mt-16 mb:px-4 mb:mt-16 sm:px-4 md:px-16">
-            <h3 class="text-1xs border-solid border-b-[1px]">Popular from other blogs</h3>
+              <div class="item-ingredient px-3 mt-3 mb-3 text-xss"></div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <div class="flex gap-4 mt-4 mb:flex-wrap">
+      <!-- ================= -->
+      <!-- CATEGORY LIST -->
+      <!-- =============== -->
+      <section
+        class="s-category-box hidden  flex-wrap justify-center items-center gap-5 px-20 mt-16 mb:px-4 mb:mt-16 sm:px-4 md:px-16"
+      >
+        <!-- <h2
+          class="pb-2 border-solid border-b-[1px]"
+        >
+          ...
+        </h2> -->
+          
+          <div
+            class=" s-category-name capitalize text-1xs text-gray-700 font-bold  h-60 w-48 bg-slate-100 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 mb:h-72 sm:h-52"
+          >
+            <!-- <div
+              class="w-[85%] h-20 p-1 pt-2 rounded-md bg-gray-200 text-center text-xs capitalize relative"
+            >
+              Breakfast
 
-                <!--==========FROM BLOGS -->
-                <div class="min-h-96 w-[75%] mb:w-full sm:w-[65%]">
+              <div
+                class="w-[90px] p-1 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200 absolute top-[-1rem] left-1/3"
+              >
+                Breakfast
+              </div>
+            </div> -->
+          </div>
+      </section>
 
-                    <div class="min-h-80  flex gap-4 mb:flex-wrap sm:flex-wrap">
-                        <div id='meal-img-box'
-                            class=" h-80 w-[410px] rounded-md bg-slate-400 bg-center bg-no-repeat bg-cover mb:h-56 mb:w-full sm:h-64 sm:w-full md:w-[400px]">
-                        </div>
+      <!-- ================= -->
+      <!-- RANDOM MEAL -->
+      <!-- =============== -->
+      <section class="random-box px-20 mt-16 mb:px-4 mb:mt-16 sm:px-4 md:px-16">
+        <h3 class="text-1xs border-solid border-b-[1px]">
+          Popular from other blogs
+        </h3>
 
-                        <div class="flex flex-col gap-4">
-                            <div class="w-[400px] pt-2 mb:w-full sm:w-full md:w-[300px]">
-                                <div
-                                    class=" meal-category w-fit py-1 px-3 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200">
-                                    vegan
-                                </div>
+        <div class="flex gap-4 mt-4 mb:flex-wrap">
+          <!--==========FROM BLOGS -->
+          <div class="min-h-96 w-[75%] mb:w-full sm:w-[65%]">
+            <div class="min-h-80 flex gap-4 mb:flex-wrap sm:flex-wrap">
+              <div
+                id="meal-img-box"
+                class="h-80 w-[410px] rounded-md bg-slate-400 bg-center bg-no-repeat bg-cover mb:h-56 mb:w-full sm:h-64 sm:w-full md:w-[400px]"
+              ></div>
 
-                                <h3 class="meal-name text-1xs font-semibold uppercase mb:text-[1.2rem]">Delicious
-                                    creamy smoothie</h3>
+              <div class="flex flex-col gap-4">
+                <div class="w-[400px] pt-2 mb:w-full sm:w-full md:w-[300px]">
+                  <div
+                    class="meal-category w-fit py-1 px-3 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200"
+                  >
+                    vegan
+                  </div>
 
-                                <p class="meal-guide text-gray-400 text-xss mb:text-[0.8rem]">Then we are layering the
-                                    puff
-                                    pastry with a quick schmear
-                                    of
-                                    creamy
-                                    Swiss-ified cheese sauce, an egg, and some diced ham….</p>
-                            </div>
+                  <h3
+                    class="meal-name text-1xs font-semibold uppercase mb:text-[1.2rem]"
+                  >
+                    Delicious creamy smoothie
+                  </h3>
 
-                            <a href="#" class="meal-src " target="_blank">
-                                <p class=" rounded-full text-slate-500 hover:text-blue-400">Read more...</p>
-                            </a>
-                        </div>
-
-                    </div>
-
-                    <!-- =================MORE FROM BLOGS (TAGS) -->
-
-                    <div
-                        class="min-h-80 mt-16 pt-3 pr-3 flex gap-8 border-solid border-t-[1px]  mb:flex-wrap mb:pr-0 sm:flex-wrap sm:pr-0 sm:gap-4">
-                        <div class="h-80 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 mb:h-72 sm:h-52 "
-                            style="background-image: url('./src/images/img-1.jpg')">
-
-
-                            <div
-                                class="w-[85%] h-20 p-1 rounded-md bg-gray-200 text-center text-xs capitalize relative">
-                                Breakfast
-
-                                <div
-                                    class="w-[90px] p-1 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200 absolute top-[-1rem] left-1/3">
-                                    Breakfast
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="h-80 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 mb:h-72 sm:h-52 "
-                            style="background-image: url('./src/images/img-1.jpg')">
-
-
-                            <div
-                                class="w-[85%] h-20 p-1 rounded-md bg-gray-200 text-center text-xs capitalize relative">
-                                Breakfast
-
-                                <div
-                                    class="w-[90px] p-1 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200 absolute top-[-1rem] left-1/3">
-                                    Breakfast
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  <p class="meal-guide text-gray-400 text-xss mb:text-[0.8rem]">
+                    Then we are layering the puff pastry with a quick schmear of
+                    creamy Swiss-ified cheese sauce, an egg, and some diced
+                    ham….
+                  </p>
                 </div>
 
-                <!-- --==========-CATEGORIES -->
-                <div class="w-[26%] mb:w-full mb:mt-6 sm:w-[35%]">
-                    <h3
-                        class="text-[1.2rem] text-slate-100 text-center font-bold bg-gray-600 p-3 capitalize mb:text-xss ">
-                        categories</h3>
+                <a href="#" class="meal-src" target="_blank">
+                  <p class="rounded-full text-slate-500 hover:text-blue-400">
+                    Read more...
+                  </p>
+                </a>
+              </div>
+            </div>
 
-                    <div class="flex flex-col gap-1 mt-1 category-box">
-                        <div class="h-20 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 "
-                            style="background-image: url('./src/images/img-1.jpg')">
+            <!-- =================MORE FROM BLOGS (TAGS) -->
 
-                            <!-- <div
+            <div
+              class="min-h-80 mt-16 pt-3 pr-3 flex gap-8 border-solid border-t-[1px] mb:flex-wrap mb:pr-0 sm:flex-wrap sm:pr-0 sm:gap-4"
+            >
+              <div
+                class="h-80 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 mb:h-72 sm:h-52"
+                style="background-image: url('./src/images/img-1.jpg')"
+              >
+                <div
+                  class="w-[85%] h-20 p-1 rounded-md bg-gray-200 text-center text-xs capitalize relative"
+                >
+                  Breakfast
+
+                  <div
+                    class="w-[90px] p-1 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200 absolute top-[-1rem] left-1/3"
+                  >
+                    Breakfast
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="h-80 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 mb:h-72 sm:h-52"
+                style="background-image: url('./src/images/img-1.jpg')"
+              >
+                <div
+                  class="w-[85%] h-20 p-1 rounded-md bg-gray-200 text-center text-xs capitalize relative"
+                >
+                  Breakfast
+
+                  <div
+                    class="w-[90px] p-1 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200 absolute top-[-1rem] left-1/3"
+                  >
+                    Breakfast
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- --==========-CATEGORIES -->
+          <div class="w-[26%] mb:w-full mb:mt-6 sm:w-[35%]">
+            <h3
+              class="text-[1.2rem] text-slate-100 text-center font-bold bg-gray-600 p-3 capitalize mb:text-xss"
+            >
+              categories
+            </h3>
+
+            <div class="flex flex-col gap-1 mt-1 category-box">
+              <div
+                class="h-20 w-full bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4"
+                style="background-image: url('./src/images/img-1.jpg')"
+              >
+                <!-- <div
                                 class="w-[90px] p-1 rounded-2xl bg-slate-500 text-center text-xs uppercase font-bold text-slate-200 ">
                                 Breakfast
                             </div> -->
-                        </div>
-                    </div>
-
-
-                </div>
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-        </section>
-
-
-
-        <!-- <section class="mt-24 mb-24 pt-3 bg-slate-500">
+      <!-- <section class="mt-24 mb-24 pt-3 bg-slate-500">
             <div class="text-center mt-4 mb-2">
                 <p class="font-bold text-xs uppercase text-slate-200 ">categories</p>
                 <h2 class="text-1xs text-slate-100">Discover more</h2> 
@@ -233,27 +299,18 @@
             </div>
         </section> -->
 
-
-
-
-        <!-- ======================= -->
-        <!-- FOOTER -->
-        <!-- ======================== -->
-        <!-- <section class="h-96 mt-8 border-solid border-orange-400 border-2">welcome to the Recipe app</section> -->
-        <section class="h-[50px] mt-8 mb-4 px-20 mb:px-4 sm:px-4 md:px-16">
-            <p class="p-4 border-solid border-y text-xs">Built by Hestia 2024</p>
-        </section>
-
-
+      <!-- ======================= -->
+      <!-- FOOTER -->
+      <!-- ======================== -->
+      <!-- <section class="h-96 mt-8 border-solid border-orange-400 border-2">welcome to the Recipe app</section> -->
+      <section class="h-[50px] mt-8 mb-4 px-20 mb:px-4 sm:px-4 md:px-16">
+        <p class="p-4 border-solid border-y text-xs">Built by Hestia 2024</p>
+      </section>
     </div>
 
     <script src="./src/ts/app.js"></script>
-
-
-</body>
-
+  </body>
 </html>
-
 
 <!-- <div class="h-72 w-[12rem] flex flex-col justify-end items-center pb-4 border-solid border-black border-1 rounded-md bg-center bg-no-repeat bg-cover "
                     style="background-image: url('./src/images/img-9.jpg');">
