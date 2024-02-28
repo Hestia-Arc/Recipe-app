@@ -1,7 +1,6 @@
 const box = document.querySelector(".box");
 const boxImg = document.querySelector(".img-box");
 const randomBox = document.querySelector(".random-box") as HTMLElement;
-const mealImage = document.querySelector("#meal-img-box") as HTMLElement;
 const cateBox = document.querySelector(".category-box") as HTMLElement;
 const categoryListBox = document.querySelector(
   ".s-category-box"
@@ -10,10 +9,22 @@ const categoryName = document.querySelector("s-category-name") as HTMLElement;
 
 const moreDisplay = document.querySelector(".recipe-display-box");
 
+const mealImage = document.querySelector("#meal-img-box") as HTMLElement;
 const mealCategory = document.querySelector(".meal-category") as HTMLElement;
 const mealName = document.querySelector(".meal-name");
 const mealGuide = document.querySelector(".meal-guide") as HTMLElement;
 const mealBlogLink = document.querySelector(".meal-src") as HTMLElement;
+
+// for the two random meals
+const rdImgEl1 = document.querySelector(".rd-img-el1") as HTMLElement;
+const rdCateEl1 = document.querySelector(".rd-cat-el1") ;
+const rdNameEl1 = document.querySelector(".rd-name-el1");
+// -
+const rdImgEl2 = document.querySelector(".rd-img-el2") as HTMLElement;
+const rdCateEl2 = document.querySelector(".rd-cat-el2") ;
+const rdNameEl2 = document.querySelector(".rd-name-el2");
+
+// for search
 const searchInput = document.querySelector("#search-input") as HTMLInputElement;
 const searchBtn = document.querySelector("#search-btn") as HTMLElement;
 const searchDisplayBox = document.querySelector(
@@ -117,6 +128,17 @@ function displayRecipe(info: RecipeBox) {
   mealBlogLink.setAttribute("href", data.strSource);
 }
 
+function displayRandomRecipe(info: RecipeBox, imgEl, caEl, nameEl ) {
+  const data = info.meals[0];
+    // console.log(data.strCategory);
+
+  imgEl.style.backgroundImage = `url(${data?.strMealThumb})`;
+  caEl.textContent = data.strCategory;
+  nameEl.textContent = data.strMeal;
+
+  imgEl.setAttribute("href", data.strSource);
+}
+
 async function getRecipes() {
   const response = await fetch(
     "https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata",
@@ -174,6 +196,10 @@ async function getSingleCategory(category: string) {
 
     data.meals?.forEach((meal) => {
       let mealLink = document.createElement("a");
+      mealLink.setAttribute(
+        "onclick",
+        `displaySingleSearchDetails('${meal.idMeal}')`
+      );
       let html = `
         <div
         class="h-60 w-48 bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 hover:cursor-pointer mb:h-72 sm:h-52"
@@ -193,6 +219,8 @@ async function getSingleCategory(category: string) {
       categoryListBox.appendChild(mealLink);
 
     });
+
+    categoryName.textContent = category
 
     return data;
   } catch (err) {
@@ -264,6 +292,39 @@ async function getMeal() {
   // console.log(data);
   return data;
 }
+
+// =============================
+// GET RANDOM-2 MEAL
+// ============================
+async function getMeal2() {
+  const response = await fetch(
+    "https://www.themealdb.com/api/json/v1/1/random.php",
+    { method: "GET" }
+  );
+
+  const data = await response.json();
+
+  displayRandomRecipe(data, rdImgEl1, rdCateEl1, rdNameEl1);
+  // console.log(data);
+  return data;
+}
+
+// =============================
+// GET RANDOM-3 MEAL
+// ============================
+async function getMeal3() {
+  const response = await fetch(
+    "https://www.themealdb.com/api/json/v1/1/random.php",
+    { method: "GET" }
+  );
+
+  const data = await response.json();
+
+  displayRandomRecipe(data, rdImgEl2, rdCateEl2, rdNameEl2);
+  // console.log(data);
+  return data;
+}
+
 
 // --------------------------------
 async function displaySingleSearchDetails(id: string) {
@@ -410,4 +471,6 @@ async function searchMeal(e) {
 // getRecipes();
 getCategories();
 getMeal();
+getMeal2();
+getMeal3();
 formBox.addEventListener("submit", searchMeal);

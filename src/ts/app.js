@@ -37,15 +37,24 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var box = document.querySelector(".box");
 var boxImg = document.querySelector(".img-box");
 var randomBox = document.querySelector(".random-box");
-var mealImage = document.querySelector("#meal-img-box");
 var cateBox = document.querySelector(".category-box");
 var categoryListBox = document.querySelector(".s-category-box");
 var categoryName = document.querySelector("s-category-name");
 var moreDisplay = document.querySelector(".recipe-display-box");
+var mealImage = document.querySelector("#meal-img-box");
 var mealCategory = document.querySelector(".meal-category");
 var mealName = document.querySelector(".meal-name");
 var mealGuide = document.querySelector(".meal-guide");
 var mealBlogLink = document.querySelector(".meal-src");
+// for the two random meals
+var rdImgEl1 = document.querySelector(".rd-img-el1");
+var rdCateEl1 = document.querySelector(".rd-cat-el1");
+var rdNameEl1 = document.querySelector(".rd-name-el1");
+// -
+var rdImgEl2 = document.querySelector(".rd-img-el2");
+var rdCateEl2 = document.querySelector(".rd-cat-el2");
+var rdNameEl2 = document.querySelector(".rd-name-el2");
+// for search
 var searchInput = document.querySelector("#search-input");
 var searchBtn = document.querySelector("#search-btn");
 var searchDisplayBox = document.querySelector(".search-result-box");
@@ -71,6 +80,14 @@ function displayRecipe(info) {
     mealName.textContent = data.strMeal;
     mealGuide.innerHTML = "".concat(guide, "...");
     mealBlogLink.setAttribute("href", data.strSource);
+}
+function displayRandomRecipe(info, imgEl, caEl, nameEl) {
+    var data = info.meals[0];
+    // console.log(data.strCategory);
+    imgEl.style.backgroundImage = "url(".concat(data === null || data === void 0 ? void 0 : data.strMealThumb, ")");
+    caEl.textContent = data.strCategory;
+    nameEl.textContent = data.strMeal;
+    imgEl.setAttribute("href", data.strSource);
 }
 function getRecipes() {
     return __awaiter(this, void 0, void 0, function () {
@@ -113,10 +130,12 @@ function getSingleCategory(category) {
                     console.log(data);
                     (_a = data.meals) === null || _a === void 0 ? void 0 : _a.forEach(function (meal) {
                         var mealLink = document.createElement("a");
+                        mealLink.setAttribute("onclick", "displaySingleSearchDetails('".concat(meal.idMeal, "')"));
                         var html = "\n        <div\n        class=\"h-60 w-48 bg-slate-500 rounded-md bg-center bg-no-repeat bg-cover flex flex-col justify-end items-center pb-4 hover:cursor-pointer mb:h-72 sm:h-52\"\n        style=\"background-image: url('".concat(meal.strMealThumb, "')\"\n        >\n            <div\n              class=\"w-[85%] p-[2px]  rounded-xl bg-gray-100 text-center text-xs capitalize font-[400] text-gray-900\n               \"\n            >\n              ").concat(meal.strMeal, "\n            </div>\n        </div>\n\n      ");
                         mealLink.innerHTML = html;
                         categoryListBox.appendChild(mealLink);
                     });
+                    categoryName.textContent = category;
                     return [2 /*return*/, data];
                 case 4:
                     err_1 = _b.sent();
@@ -178,6 +197,48 @@ function getMeal() {
                 case 2:
                     data = _a.sent();
                     displayRecipe(data);
+                    // console.log(data);
+                    return [2 /*return*/, data];
+            }
+        });
+    });
+}
+// =============================
+// GET RANDOM-2 MEAL
+// ============================
+function getMeal2() {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fetch("https://www.themealdb.com/api/json/v1/1/random.php", { method: "GET" })];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    data = _a.sent();
+                    displayRandomRecipe(data, rdImgEl1, rdCateEl1, rdNameEl1);
+                    // console.log(data);
+                    return [2 /*return*/, data];
+            }
+        });
+    });
+}
+// =============================
+// GET RANDOM-3 MEAL
+// ============================
+function getMeal3() {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fetch("https://www.themealdb.com/api/json/v1/1/random.php", { method: "GET" })];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    data = _a.sent();
+                    displayRandomRecipe(data, rdImgEl2, rdCateEl2, rdNameEl2);
                     // console.log(data);
                     return [2 /*return*/, data];
             }
@@ -278,4 +339,6 @@ function searchMeal(e) {
 // getRecipes();
 getCategories();
 getMeal();
+getMeal2();
+getMeal3();
 formBox.addEventListener("submit", searchMeal);
